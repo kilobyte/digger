@@ -78,7 +78,7 @@ void ProcessKbd(void)
 
 		state=UpdateStates(&result);
 		if(newconsf==true && pausef==true) /* return to game ? */
-		  if(state==false) 
+		  if(state==false)
 		    continue;
 		  else newconsf=false;			/* yes */
 		
@@ -90,10 +90,10 @@ void ProcessKbd(void)
 		    ioctl(0, VT_GETACTIVE, &activecons);
 		    if(newcons==activecons) /* to another console ? */
 			break;
-		    
+		
 		    newconsf=true;
 		    /* do switch */
-		    ioctl(0,VT_ACTIVATE,(caddr_t)(long)newcons); 
+		    ioctl(0,VT_ACTIVATE,(caddr_t)(long)newcons);
 		    if(started==true && pausef==false) {
 			    pausef=true;
 			    testpause(); /* force pause if game active */
@@ -151,4 +151,3 @@ bool kbhit(void)
 	else
 		return(false);
 }
-

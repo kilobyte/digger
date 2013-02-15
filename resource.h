@@ -57,7 +57,7 @@
 #define ID_CONFIGURATION_SPEED_DEFAULT  40038
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        115

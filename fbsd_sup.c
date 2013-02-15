@@ -18,4 +18,3 @@ void catcher(int num) {
 	exit(0);
 }
 	
-

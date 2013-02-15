@@ -12,7 +12,7 @@ SDL_CONFIG?=	sdl-config
 
 .if !defined(SDL)
 CFLAGS+=	-D_VGL
-LDADD+=		-lvgl 
+LDADD+=		-lvgl
 SRCS+=		fbsd_sup.c fbsd_vid.c fbsd_kbd.c fbsd_timer.c
 .if defined(SOUND)
 SRCS+=		sdl_snd.c

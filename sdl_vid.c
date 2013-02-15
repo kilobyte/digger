@@ -5,9 +5,9 @@
  * this  notice you can  do whatever you  want with this stuff. If we meet
  * some day, and you think this stuff is worth it, you can buy me a beer in
  * return.
- * 
+ *
  * Maxim Sobolev
- * --------------------------------------------------------------------------- 
+ * ---------------------------------------------------------------------------
  */
 
 /* malloc() and friends */
@@ -215,10 +215,10 @@ void vgaputi(int16_t x, int16_t y, uint8_t *p, int16_t w, int16_t h)
 	tmp->format->palette = screen->format->palette;
 	SDL_BlitSurface(tmp, NULL, screen, &newn->rect);
 	tmp->format->palette = reserv;
-/* 
+/*
  * Following piece of code comparing already pending updates with current with
  * main goal to prevent redrawing overlapping rectangles several times.
- */ 
+ */
 	
 	for(ptr=First;ptr!=NULL;ptr=ptr->nextnode) {
 		if((newn->rect.x >= ptr->rect.x) &&
@@ -392,11 +392,11 @@ void savescreen(void)
 	fclose(f);*/
 }
 
-/* 
+/*
  * Depreciated functions, necessary only to avoid "Undefined symbol:..." compiler
  * errors.
  */
- 
+
 void cgainit(void) {}
 void cgaclear(void) {}
 void cgatitle(void) {}

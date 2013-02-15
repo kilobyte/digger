@@ -360,7 +360,7 @@ void monai(int16_t mon)
   if (bagf) {
     mondat[mon].t++; /* Time penalty */
     mongotgold=false;
-    if (mondat[mon].dir==DIR_RIGHT || mondat[mon].dir==DIR_LEFT) { 
+    if (mondat[mon].dir==DIR_RIGHT || mondat[mon].dir==DIR_LEFT) {
       push=pushbags(mondat[mon].dir,clfirst,clcoll);      /* Horizontal push */
       mondat[mon].t++; /* Time penalty */
     }

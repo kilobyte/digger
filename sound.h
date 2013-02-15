@@ -49,4 +49,3 @@ extern void (*timer0)(uint16_t t0v);
 extern void (*settimer2)(uint16_t t2v);
 extern void (*timer2)(uint16_t t2v);
 extern void (*soundkillglob)(void);
-

@@ -643,7 +643,7 @@ void parsecmd(int argc,char *argv[])
         sscanf(word+i,"%hi",&startlev);
       if (word[1]=='U' || word[1]=='u')
         unlimlives=true;
-#ifndef _WINDOWS        
+#ifndef _WINDOWS
       if (word[1]=='?' || word[1]=='h' || word[1]=='H') {
         finish();
         printf("DIGGER - Copyright (c) 1983 Windmill software\n"
@@ -682,7 +682,7 @@ void parsecmd(int argc,char *argv[])
                "/I = Start on a level other than 1\n");
         exit(1);
       }
-#endif      
+#endif
       if (word[1]=='Q' || word[1]=='q')
         soundflag=false;
       if (word[1]=='M' || word[1]=='m')
@@ -882,9 +882,9 @@ void inir(void)
 #endif
 #ifndef DIRECTX
   g_bWindowed=true;
-#else  
+#else
   g_bWindowed=!GetINIBool(INI_GRAPHICS_SETTINGS,"FullScreen",false,ININAME);
-#endif  
+#endif
   use_640x480_fullscreen=GetINIBool(INI_GRAPHICS_SETTINGS,"640x480",false,
                                     ININAME);
 #ifdef DIRECTX

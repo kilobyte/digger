@@ -157,4 +157,3 @@ void gettitle(unsigned char *buf)
 
 	uncompress(buf, &uncomplen, title_gz, CTITLELEN);
 }
-

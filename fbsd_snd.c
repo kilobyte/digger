@@ -16,4 +16,3 @@ void killsounddevice(void)
 {
 	FIXME("killsounddevice called");
 }
-

@@ -262,7 +262,7 @@ void updatefire(int n)
         for (i=0;i<7;i++)
           pix|=ggetpix(digdat[n].fx,digdat[n].fy+i);
         pix&=0x3;
-        break;       
+        break;
     }
     drawfire(n-curplayer,digdat[n].fx,digdat[n].fy,0);
     for (i=0;i<TYPES;i++)

@@ -69,4 +69,3 @@ void killsounddevice(void)
 {
 	SDL_PauseAudio(1);
 }
-

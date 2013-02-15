@@ -84,4 +84,3 @@ void s0timer2(uint16_t t0v)
 void s0soundkillglob(void)
 {
 }
-
