@@ -14,31 +14,35 @@ void inittimer(void)
 
 int32_t getlrt(void)
 {
-	return(0);
+    return(0);
 }
 
 uint32_t gethrt(void)
 {
-	int32_t diff;
+    int32_t diff;
 
-	doscreenupdate();
+    doscreenupdate();
 
-	/* Speed controlling stuff */
-	if (prev == 0) {
-		prev = SDL_GetTicks();
-	} else {
-		diff = (ftime/1000 - (SDL_GetTicks() - prev));
-		if (diff > 0) {
-			SDL_Delay(diff);
-		}
-		prev = SDL_GetTicks();
-	}
-	return(0);
+    /* Speed controlling stuff */
+    if (prev == 0)
+    {
+        prev = SDL_GetTicks();
+    }
+    else
+    {
+        diff = (ftime / 1000 - (SDL_GetTicks() - prev));
+        if (diff > 0)
+        {
+            SDL_Delay(diff);
+        }
+        prev = SDL_GetTicks();
+    }
+    return(0);
 }
 
 int32_t getkips(void)
 {
-	return(1);
+    return(1);
 }
 
 void s0initint8(void)

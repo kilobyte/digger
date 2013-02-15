@@ -50,7 +50,7 @@
 #define MSIZE MWIDTH*MHEIGHT
 
 #define MAX_REC_BUFFER 262144l
-           /* I reckon this is enough for about 36 hours of continuous play. */
+/* I reckon this is enough for about 36 hours of continuous play. */
 
 #define INI_GAME_SETTINGS "Game"
 #define INI_GRAPHICS_SETTINGS "Graphics"

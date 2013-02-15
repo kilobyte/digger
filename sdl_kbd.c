@@ -16,47 +16,48 @@
 #include "hardware.h"
 #include "sdl_vid.h"
 
-#define KBLEN		30
+#define KBLEN           30
 int16_t kbuffer[KBLEN];
-int16_t klen=0;
+int16_t klen = 0;
 
 int Handler(const SDL_Event *event)
 {
-	if(event->type == SDL_KEYDOWN) {
-		if(klen == KBLEN) /* Buffer is full, drop some pieces */
-			memcpy(kbuffer, kbuffer + 1, --klen);
-		kbuffer[klen++] = event->key.keysym.sym;
+    if (event->type == SDL_KEYDOWN)
+    {
+        if (klen == KBLEN) /* Buffer is full, drop some pieces */
+            memcpy(kbuffer, kbuffer + 1, --klen);
+        kbuffer[klen++] = event->key.keysym.sym;
 
-		/* ALT + Enter handling (fullscreen/windowed operation) */
-		if((event->key.keysym.sym == SDLK_RETURN || event->key.keysym.sym == SDLK_KP_ENTER) &&
-		    ((event->key.keysym.mod & KMOD_ALT) != 0))
-			switchmode();
-	}
-	if(event->type == SDL_QUIT)
-		exit(0);
+        /* ALT + Enter handling (fullscreen/windowed operation) */
+        if ((event->key.keysym.sym == SDLK_RETURN || event->key.keysym.sym == SDLK_KP_ENTER) &&
+                ((event->key.keysym.mod & KMOD_ALT) != 0))
+            switchmode();
+    }
+    if (event->type == SDL_QUIT)
+        exit(0);
 
-	return(1);
+    return(1);
 }
 
 bool GetAsyncKeyState(int key)
 {
-	uint8_t *keys;
-	
-	SDL_PumpEvents();
-	keys = SDL_GetKeyState(NULL);
-	if (keys[key] == SDL_PRESSED )
-		return(true);
-	else
-		return(false);
+    uint8_t *keys;
+
+    SDL_PumpEvents();
+    keys = SDL_GetKeyState(NULL);
+    if (keys[key] == SDL_PRESSED)
+        return(true);
+    else
+        return(false);
 }
 
 void initkeyb(void)
 {
-	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
-	
-	SDL_SetEventFilter(Handler);
+    SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
+    SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
+    SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);
+
+    SDL_SetEventFilter(Handler);
 }
 
 void restorekeyb(void)
@@ -65,24 +66,24 @@ void restorekeyb(void)
 
 int16_t getkey(void)
 {
-	int16_t result;
-	
-	while(kbhit() != true)
-		gethrt();
-	result = kbuffer[0];
-	memcpy(kbuffer, kbuffer + 1, --klen);
+    int16_t result;
 
-	return(result);
+    while (kbhit() != true)
+        gethrt();
+    result = kbuffer[0];
+    memcpy(kbuffer, kbuffer + 1, --klen);
+
+    return(result);
 }
 
 bool kbhit(void)
 {
-	SDL_PumpEvents();
-	doscreenupdate();
+    SDL_PumpEvents();
+    doscreenupdate();
 
-	if (klen > 0)
-		return(true);
-	else
-		return(false);
+    if (klen > 0)
+        return(true);
+    else
+        return(false);
 
 }

@@ -153,7 +153,7 @@ const unsigned char title_gz[CTITLELEN] = {
 
 void gettitle(unsigned char *buf)
 {
-	uLongf uncomplen=UTITLELEN;
+    uLongf uncomplen = UTITLELEN;
 
-	uncompress(buf, &uncomplen, title_gz, CTITLELEN);
+    uncompress(buf, &uncomplen, title_gz, CTITLELEN);
 }

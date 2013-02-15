@@ -5,16 +5,17 @@
 
 void strupr(char *str)
 {
-	while(*str != 0) {
-		*str = toupper(*str);
-		str++;
-	}
+    while (*str != 0)
+    {
+        *str = toupper(*str);
+        str++;
+    }
 }
 
-void catcher(int num) {
-	fprintf(stderr, "Signal %d catched, exitting\n", num);
-	graphicsoff();
-	restorekeyb();
-	exit(0);
+void catcher(int num)
+{
+    fprintf(stderr, "Signal %d catched, exitting\n", num);
+    graphicsoff();
+    restorekeyb();
+    exit(0);
 }
-	

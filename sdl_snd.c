@@ -15,57 +15,58 @@ bool wave_device_available = false;
 
 bool initsounddevice(void)
 {
-	return(true);
+    return(true);
 }
 
 bool setsounddevice(int base, int irq, int dma, uint16_t samprate, uint16_t bufsize)
 {
-	SDL_AudioSpec wanted;
-	bool result = false;
-	
-	wanted.freq = samprate;
-	wanted.samples = bufsize;
-	wanted.channels = 1;
-	wanted.format = AUDIO_U8;
-	wanted.userdata = NULL;
-	wanted.callback = fill_audio;
+    SDL_AudioSpec wanted;
+    bool result = false;
+
+    wanted.freq = samprate;
+    wanted.samples = bufsize;
+    wanted.channels = 1;
+    wanted.format = AUDIO_U8;
+    wanted.userdata = NULL;
+    wanted.callback = fill_audio;
 
 #ifdef _VGL
-	restorekeyb();
+    restorekeyb();
 #endif
 
-	if ((SDL_Init(SDL_INIT_AUDIO)) >= 0)
-		if ((SDL_OpenAudio(&wanted, NULL)) >= 0)
-			result = true;
-	if (result == false)
-		fprintf(stderr, "Couldn't open audio: %s\n", SDL_GetError());
-	else {
-		buf = malloc(bufsize);
-		bsize = bufsize;
-		wave_device_available = true;
-	}
+    if ((SDL_Init(SDL_INIT_AUDIO)) >= 0)
+        if ((SDL_OpenAudio(&wanted, NULL)) >= 0)
+            result = true;
+    if (result == false)
+        fprintf(stderr, "Couldn't open audio: %s\n", SDL_GetError());
+    else
+    {
+        buf = malloc(bufsize);
+        bsize = bufsize;
+        wave_device_available = true;
+    }
 
 #ifdef _VGL
-	initkeyb();
+    initkeyb();
 #endif
 
-	return(result);
+    return(result);
 }
 
 void fill_audio(void *udata, uint8_t *stream, int len)
 {
-	int i;
+    int i;
 
-	if (len > bsize)
-		len = bsize;
-	for(i = 0; i<len; i++)
-		buf[i] = getsample();
+    if (len > bsize)
+        len = bsize;
+    for (i = 0; i < len; i++)
+        buf[i] = getsample();
 
-	SDL_MixAudio(stream, buf, len, SDL_MIX_MAXVOLUME);
+    SDL_MixAudio(stream, buf, len, SDL_MIX_MAXVOLUME);
 }
 
 
 void killsounddevice(void)
 {
-	SDL_PauseAudio(1);
+    SDL_PauseAudio(1);
 }

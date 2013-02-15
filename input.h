@@ -7,7 +7,7 @@ void flushkeybuf(void);
 void findkey(int kn);
 void clearfire(int n);
 
-extern bool firepflag,fire2pflag,escape;
+extern bool firepflag, fire2pflag, escape;
 extern int8_t keypressed;
 extern int16_t akeypressed;
 
