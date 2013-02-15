@@ -11,19 +11,11 @@
 #include "scores.h"
 #include "sprite.h"
 
-#ifndef FLATFILE
-#if defined (_WINDOWS) && !defined (__WIN32__)
-#include <malloc.h>
-#else
-#include <alloc.h>
-#endif
-#endif
-
 #ifdef _WINDOWS
 #include "win_dig.h"
 #endif
 
-char huge *recb,huge *plb,huge *plp;
+char *recb,*plb,*plp;
 
 bool playing=false,savedrf=false,gotname=false,gotgame=false,drfvalid=true,
      kludge=false;
@@ -126,8 +118,8 @@ void openplay(char *name)
   fseek(playf,0,SEEK_END);
   l=ftell(playf)-i;
   fseek(playf,i,SEEK_SET);
-  plb=plp=(char huge *)farmalloc(l);
-  if (plb==(char huge *)NULL) {
+  plb=plp=malloc(l);
+  if (plb==NULL) {
     fclose(playf);
     escape=true;
     return;
@@ -146,7 +138,7 @@ void openplay(char *name)
   game();
   gotgame=true;
   playing=false;
-  farfree(plb);
+  free(plb);
   gauntlet=origg;
   gtime=origgtime;
   kludge=false;
@@ -157,19 +149,7 @@ void openplay(char *name)
 
 void recstart(void)
 {
-#if defined FLATFILE || defined WIN16
-  uint32_t s=MAX_REC_BUFFER;
-  do {
-    recb=(char huge *)farmalloc(s);
-    if (recb==NULL)
-      s>>=1;
-  } while (recb==(char huge *)NULL && s>1024);
-#else
-  uint32_t s=farcoreleft();
-  if (s>MAX_REC_BUFFER)
-    s=MAX_REC_BUFFER;
-  recb=(char huge *)farmalloc(s);
-#endif
+  recb=malloc(MAX_REC_BUFFER);
   if (recb==NULL) {
     finish();
 #ifdef _WINDOWS

@@ -90,28 +90,6 @@
  #ifdef RUNTIMEDYNAMICLINK
   #undef RUNTIMEDYNAMICLINK
  #endif
- #if defined (_WINDOWS)
-  #ifndef WIN16
-   #define WIN16
-  #endif
-  #ifdef _MSVC
-   #define farmalloc _fmalloc
-   #define farfree _ffree
-  #endif
- #endif 
-#endif
-
-#if defined ARM || defined(__WIN32__) || defined UNIX || defined(__MINGW32__)
-#define FLATFILE
-#endif
-
-#ifdef FLATFILE
-#define near
-#define far
-#define huge
-#define farmalloc malloc
-#define farfree free
-#define farcoreleft coreleft
 #endif
 
 #ifdef ARM

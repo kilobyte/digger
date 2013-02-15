@@ -554,8 +554,6 @@ it.
 *   If your system is a UNIX-like (API's, filesystem layout, memory management
     etc), then replace "YOUR_UNIX_LIKE_ARCH_GOING_HERE" with actual name of
     your OS.
-*   If your system has a flat memory model (most modern protected-mode system)
-    then add its name to the list of OSes for which FLATFILE should be defined.
 
 *   If your system doesn't have strup() function then add its name to the
     section where "fbsd_sup.h" being included and make sure that you have added
