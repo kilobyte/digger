@@ -30,11 +30,7 @@ void mprintf(char *f, ...);
 void makedir(int16_t *dir, bool *fire, char d);
 char maked(int16_t dir, bool fire);
 
-#ifdef ARM
-#define DEFAULTSN "Digger:Lastgame"
-#else
 #define DEFAULTSN "DIGGER.DRF"
-#endif
 
 #ifdef INTDRF
 FILE *info;
@@ -379,9 +375,7 @@ void recsavedrf(void)
                 sprintf(nambuf, "%c%c%i", init[1], init[2], scoret);
             else
                 sprintf(nambuf, "%c%c%i", init[0], init[2], scoret);
-#ifndef ARM
             strcat(nambuf, ".drf");
-#endif
             recf = fopen(nambuf, "wt");
         }
         if (recf == NULL)

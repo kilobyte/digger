@@ -33,84 +33,6 @@ static int16_t keydir = 0, keydir2 = 0, jleftthresh = 0, jupthresh = 0, jrightth
 
 static bool joyflag = false;
 
-
-#ifdef ARM
-
-#include "C:kernel.h"
-#define rightpressed (_kernel_osbyte(129,keycodes[0][0],255)&0xff==0xff)
-#define uppressed (_kernel_osbyte(129,keycodes[1][0],255)&0xff==0xff)
-#define leftpressed (_kernel_osbyte(129,keycodes[2][0],255)&0xff==0xff)
-#define downpressed (_kernel_osbyte(129,keycodes[3][0],255)&0xff==0xff)
-#define f1pressed (_kernel_osbyte(129,keycodes[4][0],255)&0xff==0xff)
-#define right2pressed (_kernel_osbyte(129,keycodes[5][0],255)&0xff==0xff)
-#define up2pressed (_kernel_osbyte(129,keycodes[6][0],255)&0xff==0xff)
-#define left2pressed (_kernel_osbyte(129,keycodes[7][0],255)&0xff==0xff)
-#define down2pressed (_kernel_osbyte(129,keycodes[8][0],255)&0xff==0xff)
-#define f12pressed (_kernel_osbyte(129,keycodes[9][0],255)&0xff==0xff)
-
-/* Default key codes for ARM */
-
-int keycodes[17][5] = {{134, 0, -2, -2, -2}, /* 1 Right */
-    {198, 0, -2, -2, -2}, /* 1 Up */
-    {230, 0, -2, -2, -2}, /* 1 Left */
-    {214, 0, -2, -2, -2}, /* 1 Down */
-    {142, 0, -2, -2, -2}, /* 1 Fire */
-    {134, 0, -2, -2, -2}, /* 2 Right */
-    {198, 0, -2, -2, -2}, /* 2 Up */
-    {230, 0, -2, -2, -2}, /* 2 Left */
-    {214, 0, -2, -2, -2}, /* 2 Down */
-    {142, 0, -2, -2, -2}, /* 2 Fire */
-    {20, -2, -2, -2, -2}, /* Cheat */
-    {43, -2, -2, -2, -2}, /* Accelerate */
-    {45, -2, -2, -2, -2}, /* Brake */
-    {137, -2, -2, -2, -2}, /* Music */
-    {139, -2, -2, -2, -2}, /* Sound */
-    {140, -2, -2, -2, -2}, /* Exit */
-    {32, -2, -2, -2, -2}
-};  /* Pause */
-
-#define ASCIIF8 138
-
-/* This function exclusively used in keyboard redefinition */
-void findkey(int kn)
-{
-    int k = 0, i, j;
-    bool f = false;
-    do
-    {
-        for (i = 130; i < 256 && !f; i++)
-            if (_kernel_osbyte(129, i, 255) & 0xff == 0xff)
-                f = true;
-        gretrace();
-        if (kbhit())
-            k = getkey();
-    }
-    while (k == 0 && !f);
-    j = i - 1;
-    if (k == 0) k = -2;
-    if (k >= 'a' && k <= 'z')
-        k -= 'a' - 'A';
-    for (i = 0; i < 5; i++)
-        keycodes[kn][i] = -2;
-    if (kn > 9)
-        i = 0;
-    else
-    {
-        i = 2;
-        keycodes[kn][0] = j;
-        keycodes[kn][1] = 0;
-    }
-    keycodes[kn][i++] = k;
-    if (k >= 'A' && k <= 'Z')
-    {
-        keycodes[kn][i++] = k - ('A' - 'a'); /* lower case */
-        keycodes[kn][i++] = k - '@'; /* ctrl code */
-    }
-    krdf[kn] = true;
-}
-
-#else
-
 #ifdef _WINDOWS
 
 #define rightpressed  (GetAsyncKeyState(keycodes[0][0]) & 0x8000)
@@ -263,7 +185,6 @@ int keycodes[17][5] = {{0x4d, 0xcd, 0x14d, -2, -2}, /* 1 Right */
 
 #define ASCIIF8 322
 
-#endif
 #endif
 #endif
 

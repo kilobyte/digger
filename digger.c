@@ -78,9 +78,6 @@ uint32_t frame;
 
 void newframe(void)
 {
-
-#ifndef ARM
-
     uint32_t t;
     if (synchvid)
     {
@@ -110,19 +107,6 @@ void newframe(void)
         while (curtime + ftime > t && t > curtime);
         curtime = t;
     }
-
-#else
-
-    for (; curtime < ftime; curtime += 15000)
-    {
-        fillbuffer();
-        gretrace();
-        soundint();
-        checkkeyb();
-    }
-    curtime -= ftime;
-
-#endif
 
 #ifdef INTDRF
     frame++;

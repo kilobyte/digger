@@ -703,9 +703,6 @@ void parsecmd(int argc, char *argv[])
                 finish();
                 printf("DIGGER - Copyright (c) 1983 Windmill software\n"
                        "Restored 1998 by AJ Software\n"
-#ifdef ARM
-                       "Acorn port by Julian Brown\n"
-#endif
                        "http://www.digger.org\n"
                        "Version: "DIGGER_VERSION"\n\n"
 

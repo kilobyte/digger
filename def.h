@@ -68,11 +68,7 @@
 #ifdef _WINDOWS
 #define DEF_SND_DEV 1
 #else
-#ifdef ARM
-#define DEF_SND_DEV 1
-#else
 #define DEF_SND_DEV 0
-#endif
 #endif
 
 #if !defined (_MSVC) && defined (__WIN32__)
@@ -92,9 +88,7 @@
  #endif
 #endif
 
-#ifdef ARM
-#define ININAME "Digger:Settings"
-#elif defined(__FreeBSD__) && defined _VGL
+#if defined(__FreeBSD__) && defined _VGL
 /* Applications using FreeBSD's console graphics running as root */
 #define ININAME "/var/games/digger/digger.rc"
 #elif defined UNIX && !defined _VGL
@@ -120,8 +114,6 @@
 
 #if defined _WINDOWS
 #define DIGGER_VERSION "TD WIN 19990707"
-#elif defined ARM
-#define DIGGER_VERSION "JB ARM 19990320"
 #elif defined _VGL
 #define DIGGER_VERSION "MS FBSD 20000407"
 #elif defined _SDL

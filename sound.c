@@ -106,10 +106,6 @@ void soundint(void)
         t2val = 40;
         if (musicflag)
             musicupdate();
-#ifdef ARM
-        else
-            soundoff();
-#endif
         soundemeraldupdate();
         soundwobbleupdate();
         soundddieupdate();
@@ -179,13 +175,8 @@ void soundlevdone(void)
 #if defined _SDL || defined _SDL_SOUND
         SDL_Delay(10);  /* Let some CPU time go away */
 #endif
-#ifdef ARM
-        gretrace();
-        soundint();
-#else
         if (timerclock == timer)
             continue;
-#endif
         soundlevdoneupdate();
 #if !defined _SDL && !defined _SDL_SOUND
         checkkeyb();
