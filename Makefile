@@ -42,7 +42,7 @@ all: digger$(ESUFFIX)
 digger$(ESUFFIX): $(OBJS)
 	$(CC) -o digger$(ESUFFIX) $(OBJS) $(LIBS)
 
-$(OBJS): %.o: %.c
+$(OBJS): %.o: %.c *.h
 	$(CC) -c $(RCFLAGS) $(CFLAGS) $< -o $@
 
 clean:
