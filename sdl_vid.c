@@ -396,10 +396,6 @@ void vgatitle(void)
     SDL_FreeSurface(tmp);
 }
 
-void gretrace(void)
-{
-}
-
 /*
  * Depreciated functions, necessary only to avoid "Undefined symbol:..." compiler
  * errors.

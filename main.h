@@ -17,4 +17,4 @@ extern char pldispbuf[];
 extern int32_t randv;
 extern int8_t leveldat[8][10][15];
 extern int gtime;
-extern bool gauntlet,timeout,synchvid,unlimlives;
+extern bool gauntlet, timeout, unlimlives;

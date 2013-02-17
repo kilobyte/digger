@@ -23,7 +23,6 @@ int16_t getkey(void);
 bool kbhit(void);
 
 void graphicsoff(void);
-void gretrace(void);
 
 void cgainit(void);
 void cgaclear(void);

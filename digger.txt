@@ -409,7 +409,6 @@ The command line options are:
   /?      = Display this list.
   /A:1,port,irq, dma,rate,length
           = Use SoundBlaster sound, e.g. /A:1,220,7,1,20000,128.
-  /V      = Synchronize timing to screen refresh.
   /U      = Allow unlimited lives.
   /I:level= Start on the specified level instead of level 1. You can't go on
             the hall of fame if you use this option.

@@ -19,7 +19,7 @@
 /* global variables */
 char pldispbuf[14];
 int16_t curplayer = 0, nplayers = 1, penalty = 0, diggers = 1, startlev = 1;
-bool unlimlives = false, gauntlet = false, timeout = false, synchvid = false;
+bool unlimlives = false, gauntlet = false, timeout = false;
 int gtime = 0;
 
 static struct game
@@ -597,8 +597,7 @@ void testpause(void)
         for (i = 0; i < diggers; i++)
             addscore(i, 0);
         drawlives();
-        if (!synchvid)
-            curtime = gethrt();
+        curtime = gethrt();
         pausef = false;
     }
     else
@@ -689,7 +688,7 @@ void parsecmd(int argc, char *argv[])
                        "[/P:playback file]\n"
                        "         [/E:playback file] [/R:record file] [/O] [/K[A]] "
                        "[/G[:time]] [/2]\n"
-                       "         [/A:device,port,irq,dma,rate,length] [/V] [/U] "
+                       "         [/A:device,port,irq,dma,rate,length] [/U] "
                        "[/I:level]\n\n"
 #ifndef UNIX
                        "/C = Use CGA graphics\n"
@@ -705,9 +704,6 @@ void parsecmd(int argc, char *argv[])
                        "/G = Gauntlet mode\n"
                        "/2 = Two player simultaneous mode\n"
                        "/A = Use alternate sound device\n"
-#ifndef UNIX
-                       "/V = Synchronize timing to vertical retrace\n"
-#endif
                        "/U = Allow unlimited lives\n"
                        "/I = Start on a level other than 1\n");
                 exit(1);
@@ -747,8 +743,6 @@ void parsecmd(int argc, char *argv[])
                        &sound_dma, &sound_rate, &sound_length);
             if (word[1] == 'Q' || word[1] == 'q')
                 quiet = true;
-            if (word[1] == 'V' || word[1] == 'v')
-                synchvid = true;
             if (word[1] == 'G' || word[1] == 'g')
             {
                 gtime = 0;
@@ -923,7 +917,6 @@ void inir(void)
                                         ININAME);
     use_async_screen_updates = GetINIBool(INI_GRAPHICS_SETTINGS, "Async", true,
                                           ININAME);
-    synchvid = GetINIBool(INI_GRAPHICS_SETTINGS, "Synch", false, ININAME);
     cgaflag = GetINIBool(INI_GRAPHICS_SETTINGS, "CGA", false, ININAME);
     biosflag = GetINIBool(INI_GRAPHICS_SETTINGS, "BIOSPalette", false, ININAME);
     if (cgaflag || biosflag)

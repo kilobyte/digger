@@ -75,28 +75,14 @@ uint32_t frame;
 void newframe(void)
 {
     uint32_t t;
-    if (synchvid)
+    do
     {
-        for (; curtime < ftime; curtime += 17094) /* 17094 = ticks in a refresh */
-        {
-            fillbuffer();
-            gretrace();
-            checkkeyb();
-        }
-        curtime -= ftime;
-        fillbuffer();
+        fillbuffer();             /* Idle time */
+        t = gethrt();
+        checkkeyb();
     }
-    else
-    {
-        do
-        {
-            fillbuffer();             /* Idle time */
-            t = gethrt();
-            checkkeyb();
-        }
-        while (curtime + ftime > t && t > curtime);
-        curtime = t;
-    }
+    while (curtime + ftime > t && t > curtime);
+    curtime = t;
 
 #ifdef INTDRF
     frame++;
