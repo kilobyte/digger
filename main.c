@@ -33,7 +33,6 @@ static bool levnotdrawn = false, alldead = false, started;
 char levfname[132];
 bool levfflag = false;
 static bool biosflag = false;
-static int32_t delaytime = 0;
 
 void shownplayers(void);
 void switchnplayers(void);
