@@ -74,11 +74,7 @@
 #define strnicmp(x, y, z) strncasecmp(x, y, z)
 #endif
 
-#if defined _SDL
 #define DIGGER_VERSION "POK SDL 20110912"
-#else
-#define DIGGER_VERSION "AJ DOS 19990506"
-#endif
 
 /* Version string:
   First word: your initials if you have changed anything.

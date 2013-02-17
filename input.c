@@ -4,9 +4,7 @@
 #include "hardware.h"
 #include "record.h"
 #include "digger.h"
-#ifdef _SDL
 #include <SDL.h>
-#endif
 
 /* global variables first */
 bool escape = false, firepflag = false, fire2pflag = false, pausef = false;
@@ -29,8 +27,6 @@ static int16_t keydir = 0, keydir2 = 0, jleftthresh = 0, jupthresh = 0, jrightth
                jdownthresh = 0, joyanax = 0, joyanay = 0;
 
 static bool joyflag = false;
-
-#ifdef _SDL
 
 bool GetAsyncKeyState(int);
 
@@ -66,109 +62,10 @@ int keycodes[17][5] = {{SDLK_RIGHT, -2, -2, -2, -2},    /* 1 Right */
 #define down2pressed  (GetAsyncKeyState(keycodes[8][0]))
 #define f12pressed    (GetAsyncKeyState(keycodes[9][0]))
 
-#else
-
-bool leftpressed = false, rightpressed = false, uppressed = false, downpressed = false,
-     f1pressed = false, left2pressed = false, right2pressed = false, up2pressed = false,
-     down2pressed = false, f12pressed = false;
-
-/* Default key codes */
-
-int keycodes[17][5] = {{0x4d, 0xcd, 0x14d, -2, -2}, /* 1 Right */
-    {0x48, 0xc8, 0x148, -2, -2}, /* 1 Up */
-    {0x4b, 0xcb, 0x14b, -2, -2}, /* 1 Left */
-    {0x50, 0xd0, 0x150, -2, -2}, /* 1 Down */
-    {0x3b, 0xbb, 0x13b, -2, -2}, /* 1 Fire */
-    {31, 159, 83, 115, 19},  /* 2 Right */
-    {17, 145, 87, 119, 23},  /* 2 Up */
-    {30, 158, 65, 97, 1},    /* 2 Left */
-    {44, 172, 90, 122, 26},  /* 2 Down */
-    {15, 143, 9, -2, -2},    /* 2 Fire */
-    {20, -2, -2, -2, -2},    /* Cheat */
-    {43, -2, -2, -2, -2},    /* Accelerate */
-    {45, -2, -2, -2, -2},    /* Brake */
-    {321, -2, -2, -2, -2},   /* Music */
-    {323, -2, -2, -2, -2},   /* Sound */
-    {324, -2, -2, -2, -2},   /* Exit */
-    {32, -2, -2, -2, -2}
-};       /* Pause */
-
-#define ASCIIF8 322
-
-#endif
-
-#if !defined(_SDL)
-static uint16_t scancode;
-#endif
-
-#if !defined(_SDL)
-static int pki;
-
-static bool *flagp[10] =
-{
-    &rightpressed, &uppressed, &leftpressed, &downpressed, &f1pressed,
-    &right2pressed, &up2pressed, &left2pressed, &down2pressed, &f12pressed
-};
-
-/* We need to know when keys are released so we know when to stop.
-   This routine is only called on platforms where keyboard makes and breaks
-   cause interrupts (this being the handler). On platforms where makes and
-   breaks set and release flags, these "variables" are actually macros linking
-   to these flags (they are each only read once).
-*/
-void processkey(uint16_t key)
-{
-    for (pki = 0; pki < 10; pki++)
-    {
-        if (key == keycodes[pki][0]) /* Make */
-            *flagp[pki] = true;
-        if (key == keycodes[pki][1]) /* Break */
-            *flagp[pki] = false;
-    }
-    scancode = key;
-}
-#endif
-
-#if !defined(_SDL)
-/* This function exclusively used in keyboard redefinition */
-void findkey(int kn)
-{
-    int k = 0, i;
-    scancode = 0;
-    do
-        if (kbhit())
-            k = getkey();
-    while (k == 0 && (scancode == 0 || scancode & 0x80));
-    if (kbhit())
-        k = getkey();
-    if (k == 0)
-        k = -2;
-    if (k >= 'a' && k <= 'z')
-        k -= 'a' - 'A';
-    for (i = 0; i < 5; i++)
-        keycodes[kn][i] = -2;
-    if (kn > 9)
-        i = 0;
-    else
-    {
-        i = 2;
-        keycodes[kn][0] = scancode & 0x7f;
-        keycodes[kn][1] = scancode | 0x80;
-    }
-    keycodes[kn][i++] = k;
-    if (k >= 'A' && k <= 'Z')
-    {
-        keycodes[kn][i++] = k - ('A' - 'a'); /* lower case */
-        keycodes[kn][i] = k - '@'; /* ctrl code */
-    }
-    krdf[kn] = true;
-}
-#else /* SDL & FBSD */
 void findkey(int kn)
 {
     keycodes[kn][0] = getkey();
 }
-#endif
 
 
 void readjoy(void);

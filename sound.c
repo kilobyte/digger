@@ -5,10 +5,8 @@
 #include "digger.h"
 #include "input.h"
 
-#if defined _SDL || defined _SDL_SOUND
 #include <SDL.h>
 #include "sdl_snd.h"
-#endif
 
 int16_t wavetype = 0, musvol = 0;
 int16_t spkrmode = 0, timerrate = 0x7d0;
@@ -154,19 +152,12 @@ void soundlevdone(void)
     while (soundlevdoneflag && !escape)
     {
         fillbuffer();
-#if defined _SDL
         if (!wave_device_available)
             soundlevdoneflag = false;
-#endif
-#if defined _SDL || defined _SDL_SOUND
         SDL_Delay(10);  /* Let some CPU time go away */
-#endif
         if (timerclock == timer)
             continue;
         soundlevdoneupdate();
-#if !defined _SDL && !defined _SDL_SOUND
-        checkkeyb();
-#endif
         timer = timerclock;
     }
     soundlevdoneoff();
@@ -832,17 +823,13 @@ void musicupdate(void)
 void soundpause(void)
 {
     soundpausedflag = true;
-#if defined _SDL || defined _SDL_SOUND
     SDL_PauseAudio(1);
-#endif
 }
 
 void soundpauseoff(void)
 {
     soundpausedflag = false;
-#if defined _SDL || defined _SDL_SOUND
     SDL_PauseAudio(0);
-#endif
 }
 
 void sett0(void)

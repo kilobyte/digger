@@ -1,9 +1,7 @@
 #include <SDL.h>
 
 #include "def.h"
-#ifdef _SDL
 #include "sdl_vid.h"
-#endif
 
 uint32_t prev = 0;
 extern uint32_t ftime;

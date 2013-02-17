@@ -1,6 +1,6 @@
 CC	?= gcc
 CFLAGS	+= -O -g -pipe
-RCFLAGS = -D_SDL -std=c99 -Wall
+RCFLAGS = -std=c99 -Wall
 OBJS	= main.o digger.o drawing.o sprite.o scores.o record.o sound.o \
 			newsnd.o ini.o input.o monster.o bags.o alpha.o vgagrafx.o \
 			title_gz.o icon.o sdl_kbd.o sdl_vid.o sdl_timer.o sdl_snd.o
