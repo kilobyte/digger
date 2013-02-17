@@ -21,12 +21,12 @@ int16_t chase = 0;
 
 bool unbonusflag = false;
 
-void createmonster(void);
-void monai(int16_t mon);
-void mondie(int16_t mon);
-bool fieldclear(int16_t dir, int16_t x, int16_t y);
-void squashmonster(int16_t mon, int16_t death, int16_t bag);
-int16_t nmononscr(void);
+static void createmonster(void);
+static void monai(int16_t mon);
+static void mondie(int16_t mon);
+static bool fieldclear(int16_t dir, int16_t x, int16_t y);
+static int16_t nmononscr(void);
+static void squashmonster(int16_t mon, int16_t death, int16_t bag);
 
 void initmonsters(void)
 {
@@ -109,7 +109,7 @@ void domonsters(void)
         }
 }
 
-void createmonster(void)
+static void createmonster(void)
 {
     int16_t i;
     for (i = 0; i < MONSTERS; i++)
@@ -145,7 +145,7 @@ void mongold(void)
     mongotgold = true;
 }
 
-void monai(int16_t mon)
+static void monai(int16_t mon)
 {
     int16_t monox, monoy, dir, mdirp1, mdirp2, mdirp3, mdirp4, t;
     int clcoll[SPRITES], clfirst[TYPES], i, m, dig;
@@ -487,7 +487,7 @@ void monai(int16_t mon)
     mondat[mon].yr = (mondat[mon].y - 18) % 18;
 }
 
-void mondie(int16_t mon)
+static void mondie(int16_t mon)
 {
     switch (mondat[mon].death)
     {
@@ -517,7 +517,7 @@ void mondie(int16_t mon)
     }
 }
 
-bool fieldclear(int16_t dir, int16_t x, int16_t y)
+static bool fieldclear(int16_t dir, int16_t x, int16_t y)
 {
     switch (dir)
     {
@@ -592,7 +592,7 @@ int16_t killmonsters(int *clfirst, int *clcoll)
     return n;
 }
 
-void squashmonster(int16_t mon, int16_t death, int16_t bag)
+static void squashmonster(int16_t mon, int16_t death, int16_t bag)
 {
     mondat[mon].alive = false;
     mondat[mon].death = death;
@@ -604,7 +604,7 @@ int16_t monleft(void)
     return nmononscr() + totalmonsters - nextmonster;
 }
 
-int16_t nmononscr(void)
+static int16_t nmononscr(void)
 {
     int16_t i, n = 0;
     for (i = 0; i < MONSTERS; i++)

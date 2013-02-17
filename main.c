@@ -34,21 +34,22 @@ char levfname[132];
 bool levfflag = false;
 static bool biosflag = false;
 
-void shownplayers(void);
-void switchnplayers(void);
-void drawscreen(void);
-void initchars(void);
-void checklevdone(void);
-int16_t levno(void);
-void testpause(void);
-void calibrate(void);
-void parsecmd(int argc, char *argv[]);
+static int mainprog(void);
+static void shownplayers(void);
+static void switchnplayers(void);
+static void drawscreen(void);
+static void initchars(void);
+static void checklevdone(void);
+static int16_t levno(void);
+static void testpause(void);
+static void calibrate(void);
+static void parsecmd(int argc, char *argv[]);
 void patchcga(void);
-void initlevel(void);
+static void initlevel(void);
 void finish(void);
-void inir(void);
-void redefkeyb(bool allf);
-int getalllives(void);
+static void inir(void);
+static void redefkeyb(bool allf);
+static int getalllives(void);
 
 int8_t leveldat[8][MHEIGHT][MWIDTH] =
 {
@@ -315,7 +316,7 @@ void game(void)
 #endif
 }
 
-void maininit(void)
+static void maininit(void)
 {
     calibrate();
     ginit();
@@ -335,7 +336,7 @@ int main(int argc, char *argv[])
     return mainprog();
 }
 
-int mainprog(void)
+static int mainprog(void)
 {
     int16_t frame, t, x = 0;
     loadscores();
@@ -468,7 +469,7 @@ void finish(void)
     graphicsoff();
 }
 
-void shownplayers(void)
+static void shownplayers(void)
 {
     if (diggers == 2)
         if (gauntlet)
@@ -498,7 +499,7 @@ void shownplayers(void)
     }
 }
 
-int getalllives(void)
+static int getalllives(void)
 {
     int t = 0, i;
     for (i = curplayer; i < diggers + curplayer; i++)
@@ -506,12 +507,12 @@ int getalllives(void)
     return t;
 }
 
-void switchnplayers(void)
+static void switchnplayers(void)
 {
     nplayers = 3 - nplayers;
 }
 
-void initlevel(void)
+static void initlevel(void)
 {
     gamedat[curplayer].levdone = false;
     makefield();
@@ -520,7 +521,7 @@ void initlevel(void)
     levnotdrawn = true;
 }
 
-void drawscreen(void)
+static void drawscreen(void)
 {
     creatembspr();
     drawstatics();
@@ -530,14 +531,14 @@ void drawscreen(void)
     initmonsters();
 }
 
-void initchars(void)
+static void initchars(void)
 {
     initmbspr();
     initdigger();
     initmonsters();
 }
 
-void checklevdone(void)
+static void checklevdone(void)
 {
     if ((countem() == 0 || monleft() == 0) && isalive())
         gamedat[curplayer].levdone = true;
@@ -571,7 +572,7 @@ int16_t levof10(void)
     return gamedat[curplayer].level;
 }
 
-int16_t levno(void)
+static int16_t levno(void)
 {
     return gamedat[curplayer].level;
 }
@@ -581,7 +582,7 @@ void setdead(bool df)
     alldead = df;
 }
 
-void testpause(void)
+static void testpause(void)
 {
     int i;
     if (pausef)
@@ -604,7 +605,7 @@ void testpause(void)
         soundpauseoff();
 }
 
-void calibrate(void)
+static void calibrate(void)
 {
     volume = (int16_t)(getkips() / 291);
     if (volume == 0)
@@ -613,7 +614,7 @@ void calibrate(void)
 
 uint16_t sound_device, sound_port, sound_irq, sound_dma, sound_rate, sound_length;
 
-void parsecmd(int argc, char *argv[])
+static void parsecmd(int argc, char *argv[])
 {
     char *word;
     int16_t arg, i = 0, j, speedmul;
@@ -845,7 +846,7 @@ char *keynames[17] = {"Right", "Up", "Left", "Down", "Fire",
 int dx_sound_volume;
 bool g_bWindowed, use_640x480_fullscreen, use_async_screen_updates;
 
-void inir(void)
+static void inir(void)
 {
     char kbuf[80], vbuf[80];
     int i, j, p;
@@ -938,7 +939,7 @@ void inir(void)
     startlev = (int)GetINIInt(INI_GAME_SETTINGS, "StartLevel", 1, ININAME);
 }
 
-void redefkeyb(bool allf)
+static void redefkeyb(bool allf)
 {
     int i, j, k, l, z, y = 0;
     bool f;

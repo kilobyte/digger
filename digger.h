@@ -6,8 +6,6 @@ int16_t countem(void);
 void makeemfield(void);
 void drawemeralds(void);
 void initdigger(void);
-void drawexplosion(int n);
-void updatefire(int n);
 void createbonus(void);
 int16_t reversedir(int16_t d);
 bool hitemerald(int16_t x, int16_t y, int16_t rx, int16_t ry, int16_t dir);

@@ -68,7 +68,7 @@ void findkey(int kn)
 }
 
 
-void readjoy(void);
+static void readjoy(void);
 
 /* The standard ASCII keyboard is also checked so that very short keypresses
    are not overlooked. The functions kbhit() (returns bool denoting whether or
@@ -154,7 +154,7 @@ void checkkeyb(void)
 
 /* Joystick not yet implemented. It will be, though, using gethrt on platform
    DOSPC. */
-void readjoy(void)
+static void readjoy(void)
 {
 }
 

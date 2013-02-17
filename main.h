@@ -7,8 +7,6 @@ void cleartopline(void);
 void finish(void);
 int16_t randno(int16_t n);
 void game(void);
-void maininit(void);
-int mainprog(void);
 
 extern int16_t nplayers, diggers, curplayer, startlev;
 extern bool levfflag;

@@ -85,7 +85,7 @@ struct PendNode *First = NULL, *Last = NULL;
 
 int pendnum = 0;
 
-SDL_Surface *ch2bmap(uint8_t *sprite, int16_t w, int16_t h)
+static SDL_Surface *ch2bmap(uint8_t *sprite, int16_t w, int16_t h)
 {
     int16_t realw, realh;
     SDL_Surface *tmp;
@@ -102,7 +102,7 @@ void graphicsoff(void)
 {
 }
 
-bool setmode(void)
+static bool setmode(void)
 {
     if ((screen = SDL_SetVideoMode(640, 400, 8, \
                                    SDL_HWSURFACE | SDL_HWPALETTE | addflag)) == NULL)
@@ -177,7 +177,7 @@ void vgaclear(void)
     vgaputi(0, 0, (uint8_t *)&tmp, 80, 200);
     SDL_FreeSurface(tmp);
 }
-void setpal(SDL_Color *pal)
+static void setpal(SDL_Color *pal)
 {
     SDL_SetColors(screen, pal, 0, 16);
 }

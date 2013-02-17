@@ -135,7 +135,7 @@ void s1timer2(uint16_t t2)
     t2v = t2rate;
 }
 
-bool addcarry(uint16_t *dest, uint16_t add)
+static bool addcarry(uint16_t *dest, uint16_t add)
 {
     *dest += add;
     if (*dest < add)
@@ -143,7 +143,7 @@ bool addcarry(uint16_t *dest, uint16_t add)
     return false;
 }
 
-bool subcarry(uint16_t *dest, uint16_t sub)
+static bool subcarry(uint16_t *dest, uint16_t sub)
 {
     *dest -= sub;
     if (*dest >= (uint16_t)(-sub))

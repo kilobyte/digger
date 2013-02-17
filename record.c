@@ -22,9 +22,9 @@ int reccc = 0, recrl = 0, rlleft = 0;
 uint32_t recp = 0;
 char recd, rld;
 
-void mprintf(char *f, ...);
-void makedir(int16_t *dir, bool *fire, char d);
-char maked(int16_t dir, bool fire);
+static void mprintf(char *f, ...);
+static void makedir(int16_t *dir, bool *fire, char d);
+static char maked(int16_t dir, bool fire);
 
 #define DEFAULTSN "DIGGER.DRF"
 
@@ -160,7 +160,7 @@ void recstart(void)
     recp = 0;
 }
 
-void mprintf(char *f, ...)
+static void mprintf(char *f, ...)
 {
     va_list ap;
     char buf[80];
@@ -175,7 +175,7 @@ void mprintf(char *f, ...)
         recp = 0;        /* Give up, file is too long */
 }
 
-void makedir(int16_t *dir, bool *fire, char d)
+static void makedir(int16_t *dir, bool *fire, char d)
 {
     if (d >= 'A' && d <= 'Z')
     {
@@ -227,7 +227,7 @@ void playgetdir(int16_t *dir, bool *fire)
     }
 }
 
-char maked(int16_t dir, bool fire)
+static char maked(int16_t dir, bool fire)
 {
     char d;
     if (dir == DIR_NONE)
@@ -239,7 +239,7 @@ char maked(int16_t dir, bool fire)
     return d;
 }
 
-void putrun(void)
+static void putrun(void)
 {
     if (recrl > 1)
         mprintf("%c%i", recd, recrl);

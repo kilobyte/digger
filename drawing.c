@@ -23,11 +23,11 @@ int16_t monspd[MONSTERS];
 
 int16_t digspr[DIGGERS], digspd[DIGGERS], firespr[FIREBALLS];
 
-void drawlife(int16_t t, int16_t x, int16_t y);
-void createdbfspr(void);
-void initdbfspr(void);
-void drawbackg(int16_t l);
-void drawfield(void);
+static void drawlife(int16_t t, int16_t x, int16_t y);
+static void createdbfspr(void);
+static void initdbfspr(void);
+static void drawbackg(int16_t l);
+static void drawfield(void);
 
 void outtext(char *p, int16_t x, int16_t y, int16_t c)
 {
@@ -85,7 +85,7 @@ void savefield(void)
                 field2[y * MWIDTH + x] = field[y * MWIDTH + x];
 }
 
-void drawfield(void)
+static void drawfield(void)
 {
     int16_t x, y, xp, yp;
     for (x = 0; x < MWIDTH; x++)
@@ -238,7 +238,7 @@ void drawgold(int16_t n, int16_t t, int16_t x, int16_t y)
     drawspr(FIRSTBAG + n, x, y);
 }
 
-void drawlife(int16_t t, int16_t x, int16_t y)
+static void drawlife(int16_t t, int16_t x, int16_t y)
 {
     drawmiscspr(x, y, t + 110, 4, 12);
 }
@@ -257,7 +257,7 @@ void eraseemerald(int16_t x, int16_t y)
     getis();
 }
 
-void createdbfspr(void)
+static void createdbfspr(void)
 {
     int i;
     for (i = 0; i < DIGGERS; i++)
@@ -275,7 +275,7 @@ void createdbfspr(void)
         createspr(i, 82, firebufs[i - FIRSTFIREBALL], 2, 8, 0, 0);
 }
 
-void initdbfspr(void)
+static void initdbfspr(void)
 {
     int i;
     for (i = 0; i < DIGGERS; i++)
@@ -335,7 +335,7 @@ void drawsquareblob(int16_t x, int16_t y)
     getis();
 }
 
-void drawbackg(int16_t l)
+static void drawbackg(int16_t l)
 {
     int16_t x, y;
     for (y = 14; y < 200; y += 4)

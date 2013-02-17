@@ -20,7 +20,7 @@
 int16_t kbuffer[KBLEN];
 int16_t klen = 0;
 
-int Handler(const SDL_Event *event)
+static int Handler(const SDL_Event *event)
 {
     if (event->type == SDL_KEYDOWN)
     {

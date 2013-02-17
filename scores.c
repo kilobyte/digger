@@ -34,14 +34,14 @@ uint16_t bonusscore = 20000;
 
 bool gotinitflag = false;
 
-void readscores(void);
-void writescores(void);
-void savescores(void);
-void getinitials(void);
-void flashywait(int16_t n);
-int16_t getinitial(int16_t x, int16_t y);
-void shufflehigh(void);
-void writenum(int32_t n, int16_t x, int16_t y, int16_t w, int16_t c);
+static void readscores(void);
+static void writescores(void);
+static void savescores(void);
+static void getinitials(void);
+static void flashywait(int16_t n);
+static int16_t getinitial(int16_t x, int16_t y);
+static void shufflehigh(void);
+static void writenum(int32_t n, int16_t x, int16_t y, int16_t w, int16_t c);
 static void numtostring(char *p, int32_t n);
 
 #if defined UNIX
@@ -61,7 +61,7 @@ int32_t getscore0(void)
 }
 #endif
 
-void readscores(void)
+static void readscores(void)
 {
     FILE *in;
     scorebuf[0] = 0;
@@ -81,7 +81,7 @@ void readscores(void)
     }
 }
 
-void writescores(void)
+static void writescores(void)
 {
     FILE *out;
     if (!levfflag)
@@ -254,7 +254,7 @@ void showtable(void)
     }
 }
 
-void savescores(void)
+static void savescores(void)
 {
     int16_t i, p = 0, j;
     if (gauntlet)
@@ -275,7 +275,7 @@ void savescores(void)
     writescores();
 }
 
-void getinitials(void)
+static void getinitials(void)
 {
     int16_t k, i;
     newframe();
@@ -313,7 +313,7 @@ void getinitials(void)
     recputinit(scoreinit[0]);
 }
 
-void flashywait(int16_t n)
+static void flashywait(int16_t n)
 {
     int16_t i, cx, p = 0;
     setretr(false);
@@ -322,7 +322,7 @@ void flashywait(int16_t n)
             gpal(p = 1 - p);
 }
 
-int16_t getinitial(int16_t x, int16_t y)
+static int16_t getinitial(int16_t x, int16_t y)
 {
     int16_t i;
     gwrite(x, y, '_', 3);
@@ -352,7 +352,7 @@ int16_t getinitial(int16_t x, int16_t y)
     while (1);
 }
 
-void shufflehigh(void)
+static void shufflehigh(void)
 {
     int16_t i, j;
     for (j = 10; j > 1; j--)
@@ -403,7 +403,7 @@ void scoreeatm(int n, int msc)
     addscore(n, msc * 200);
 }
 
-void writenum(int32_t n, int16_t x, int16_t y, int16_t w, int16_t c)
+static void writenum(int32_t n, int16_t x, int16_t y, int16_t w, int16_t c)
 {
     int16_t d, xp = (w - 1) * 12 + x;
     while (w > 0)

@@ -17,11 +17,11 @@ struct bag
 
 int16_t pushcount = 0, goldtime = 0;
 
-void updatebag(int16_t bag);
-void baghitground(int16_t bag);
-bool pushbag(int16_t bag, int16_t dir);
-void removebag(int16_t bn);
-void getgold(int16_t bag);
+static void updatebag(int16_t bag);
+static void baghitground(int16_t bag);
+static bool pushbag(int16_t bag, int16_t dir);
+static void removebag(int16_t bn);
+static void getgold(int16_t bag);
 
 void initbags(void)
 {
@@ -140,7 +140,7 @@ void dobags(void)
 
 int16_t wblanim[4] = {2, 0, 1, 0};
 
-void updatebag(int16_t bag)
+static void updatebag(int16_t bag)
 {
     int16_t x, h, xr, y, v, yr, wbl;
     x = bagdat[bag].x;
@@ -214,7 +214,7 @@ void updatebag(int16_t bag)
     }
 }
 
-void baghitground(int16_t bag)
+static void baghitground(int16_t bag)
 {
     int clfirst[TYPES], clcoll[SPRITES], i;
     if (bagdat[bag].dir == DIR_DOWN && bagdat[bag].fallh > 1)
@@ -238,7 +238,7 @@ void baghitground(int16_t bag)
     }
 }
 
-bool pushbag(int16_t bag, int16_t dir)
+static bool pushbag(int16_t bag, int16_t dir)
 {
     int16_t x, y, h, v, ox, oy;
     int clfirst[TYPES], clcoll[SPRITES], i;
@@ -395,7 +395,7 @@ bool pushudbags(int *clfirst, int *clcoll)
     return push;
 }
 
-void removebag(int16_t bag)
+static void removebag(int16_t bag)
 {
     if (bagdat[bag].exist)
     {
@@ -441,7 +441,7 @@ int16_t getnmovingbags(void)
     return n;
 }
 
-void getgold(int16_t bag)
+static void getgold(int16_t bag)
 {
     bool f = true;
     int i;

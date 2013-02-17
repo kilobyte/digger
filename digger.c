@@ -25,12 +25,14 @@ int8_t emfield[MSIZE];
 
 bool bonusvisible = false, bonusmode = false, digvisible;
 
-void updatedigger(int n);
-void diggerdie(int n);
-void initbonusmode(void);
-void endbonusmode(void);
-bool getfirepflag(int n);
-void drawdig(int n, int d, int x, int y, bool f);
+static void updatedigger(int n);
+static void diggerdie(int n);
+static void initbonusmode(void);
+static void endbonusmode(void);
+static void updatefire(int n);
+static bool getfirepflag(int n);
+static void drawdig(int n, int d, int x, int y, bool f);
+static void drawexplosion(int n);
 
 void initdigger(void)
 {
@@ -92,7 +94,7 @@ void newframe(void)
 
 uint32_t cgtime;
 
-void drawdig(int n, int d, int x, int y, bool f)
+static void drawdig(int n, int d, int x, int y, bool f)
 {
     drawdigger(n - curplayer, d, x, y, f);
     if (digdat[n].invin)
@@ -181,7 +183,7 @@ void dodigger(void)
     }
 }
 
-void updatefire(int n)
+static void updatefire(int n)
 {
     int16_t pix = 0;
     int clfirst[TYPES], clcoll[SPRITES], i;
@@ -341,7 +343,7 @@ void erasediggers(void)
     digvisible = false;
 }
 
-void drawexplosion(int n)
+static void drawexplosion(int n)
 {
     switch (digdat[n].expsn)
     {
@@ -369,7 +371,7 @@ void killfire(int n)
     }
 }
 
-void updatedigger(int n)
+static void updatedigger(int n)
 {
     int16_t dir, ddir, diggerox, diggeroy, nmon;
     bool push = true, bagf;
@@ -498,7 +500,7 @@ void sceatm(int n)
 
 int16_t deatharc[7] = {3, 5, 6, 6, 5, 3, 0};
 
-void diggerdie(int n)
+static void diggerdie(int n)
 {
     int clfirst[TYPES], clcoll[SPRITES], i;
     bool alldead;
@@ -635,7 +637,7 @@ void createbonus(void)
     drawbonus(292, 18);
 }
 
-void initbonusmode(void)
+static void initbonusmode(void)
 {
     int i;
     bonusmode = true;
@@ -647,7 +649,7 @@ void initbonusmode(void)
         digdat[i].msc = 1;
 }
 
-void endbonusmode(void)
+static void endbonusmode(void)
 {
     bonusmode = false;
     ginten(0);
@@ -778,7 +780,7 @@ void killemerald(int16_t x, int16_t y)
     }
 }
 
-bool getfirepflag(int n)
+static bool getfirepflag(int n)
 {
     return n == 0 ? firepflag : fire2pflag;
 }

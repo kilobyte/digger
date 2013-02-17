@@ -5,7 +5,7 @@
 #include "device.h"
 #include "hardware.h"
 
-void fill_audio(void *udata, uint8_t *stream, int len);
+static void fill_audio(void *udata, uint8_t *stream, int len);
 uint8_t getsample(void);
 
 uint8_t *buf;
@@ -45,7 +45,7 @@ bool setsounddevice(int base, int irq, int dma, uint16_t samprate, uint16_t bufs
     return(result);
 }
 
-void fill_audio(void *udata, uint8_t *stream, int len)
+static void fill_audio(void *udata, uint8_t *stream, int len)
 {
     int i;
 

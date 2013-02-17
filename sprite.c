@@ -22,14 +22,14 @@ int16_t sprnhei[SPRITES];
 int16_t sprnbwid[SPRITES];
 int16_t sprnbhei[SPRITES];
 
-void clearrdrwf(void);
-void clearrecf(void);
-void setrdrwflgs(int16_t n);
-bool collide(int16_t bx, int16_t si);
-bool bcollide(int16_t bx, int16_t si);
-void putims(void);
-void putis(void);
-void bcollides(int bx);
+static void clearrdrwf(void);
+static void clearrecf(void);
+static void setrdrwflgs(int16_t n);
+static bool collide(int16_t bx, int16_t si);
+static bool bcollide(int16_t bx, int16_t si);
+static void putims(void);
+static void putis(void);
+static void bcollides(int bx);
 
 void (*ginit)(void) = vgainit;
 void (*gclear)(void) = vgaclear;
@@ -163,7 +163,7 @@ void drawmiscspr(int16_t x, int16_t y, int16_t ch, int16_t wid, int16_t hei)
            sprhei[SPRITES]);
 }
 
-void clearrdrwf(void)
+static void clearrdrwf(void)
 {
     int16_t i;
     clearrecf();
@@ -171,14 +171,14 @@ void clearrdrwf(void)
         sprrdrwf[i] = false;
 }
 
-void clearrecf(void)
+static void clearrecf(void)
 {
     int16_t i;
     for (i = 0; i < SPRITES + 1; i++)
         sprrecf[i] = false;
 }
 
-void setrdrwflgs(int16_t n)
+static void setrdrwflgs(int16_t n)
 {
     int16_t i;
     if (!sprrecf[n])
@@ -196,7 +196,7 @@ void setrdrwflgs(int16_t n)
     }
 }
 
-bool collide(int16_t bx, int16_t si)
+static bool collide(int16_t bx, int16_t si)
 {
     if (sprx[bx] >= sprx[si])
     {
@@ -216,7 +216,7 @@ bool collide(int16_t bx, int16_t si)
     return false;
 }
 
-bool bcollide(int16_t bx, int16_t si)
+static bool bcollide(int16_t bx, int16_t si)
 {
     if (sprx[bx] >= sprx[si])
     {
@@ -236,7 +236,7 @@ bool bcollide(int16_t bx, int16_t si)
     return false;
 }
 
-void putims(void)
+static void putims(void)
 {
     int i;
     for (i = 0; i < SPRITES; i++)
@@ -244,7 +244,7 @@ void putims(void)
             gputim(sprx[i], spry[i], sprch[i], sprwid[i], sprhei[i]);
 }
 
-void putis(void)
+static void putis(void)
 {
     int i;
     for (i = 0; i < SPRITES; i++)
@@ -256,7 +256,7 @@ int first[TYPES], coll[SPRITES];
 int firstt[TYPES] = {FIRSTBONUS, FIRSTBAG, FIRSTMONSTER, FIRSTFIREBALL, FIRSTDIGGER};
 int lastt[TYPES] = {LASTBONUS, LASTBAG, LASTMONSTER, LASTFIREBALL, LASTDIGGER};
 
-void bcollides(int spr)
+static void bcollides(int spr)
 {
     int spc, next, i;
     for (next = 0; next < TYPES; next++)
