@@ -15,10 +15,6 @@
 #include "sdl_snd.h"
 #endif
 
-#if defined _VGL && !defined _SDL_SOUND
-#include "fbsd_snd.h"
-#endif
-
 int16_t wavetype = 0, musvol = 0;
 int16_t spkrmode = 0, timerrate = 0x7d0;
 uint16_t timercount = 0, t2val = 0, t0val = 0;
@@ -168,7 +164,7 @@ void soundlevdone(void)
         if (!wave_device_available)
             soundlevdoneflag = false;
 #endif
-#if defined _SDL || defined _VGL
+#if defined _SDL
         if (!wave_device_available)
             soundlevdoneflag = false;
 #endif

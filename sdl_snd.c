@@ -30,10 +30,6 @@ bool setsounddevice(int base, int irq, int dma, uint16_t samprate, uint16_t bufs
     wanted.userdata = NULL;
     wanted.callback = fill_audio;
 
-#ifdef _VGL
-    restorekeyb();
-#endif
-
     if ((SDL_Init(SDL_INIT_AUDIO)) >= 0)
         if ((SDL_OpenAudio(&wanted, NULL)) >= 0)
             result = true;
@@ -45,10 +41,6 @@ bool setsounddevice(int base, int irq, int dma, uint16_t samprate, uint16_t bufs
         bsize = bufsize;
         wave_device_available = true;
     }
-
-#ifdef _VGL
-    initkeyb();
-#endif
 
     return(result);
 }

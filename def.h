@@ -88,10 +88,7 @@
  #endif
 #endif
 
-#if defined(__FreeBSD__) && defined _VGL
-/* Applications using FreeBSD's console graphics running as root */
-#define ININAME "/var/games/digger/digger.rc"
-#elif defined UNIX && !defined _VGL
+#if defined UNIX
 /* While SDL and other X11 related apps could be runned as ordinary user */
 #ifdef __FreeBSD__
 #include <sys/syslimits.h>
@@ -114,8 +111,6 @@
 
 #if defined _WINDOWS
 #define DIGGER_VERSION "TD WIN 19990707"
-#elif defined _VGL
-#define DIGGER_VERSION "MS FBSD 20000407"
 #elif defined _SDL
 #define DIGGER_VERSION "POK SDL 20110912"
 #else

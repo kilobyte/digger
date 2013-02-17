@@ -69,57 +69,6 @@ int keycodes[17][5] = {{VK_RIGHT, VK_RIGHT + 0x80, 0x14d, -2, -2}, /* 1 Right */
 
 #else
 
-#ifdef _VGL
-
-bool GetAsyncKeyState(int);
-
-#define RIGHTKEY        98+128
-#define UPKEY           95+128
-#define LEFTKEY         97+128
-#define DOWNKEY         100+128
-#define F1KEY           59+128
-#define TABKEY          15+128
-#define ADDKEY          78+128
-#define SUBKEY          74+128
-#define F7KEY           65+128
-#define F8KEY           66+128
-#define F9KEY           67+128
-#define F10KEY          68+128
-
-int keycodes[17][5] = {{RIGHTKEY, -2, -2, -2, -2},      /* 1 Right */
-    {UPKEY, -2, -2, -2, -2},            /* 1 Up */
-    {LEFTKEY, -2, -2, -2, -2},          /* 1 Left */
-    {DOWNKEY, -2, -2, -2, -2},          /* 1 Down */
-    {F1KEY, -2, -2, -2, -2},            /* 1 Fire */
-    {'s', -2, -2, -2, -2},              /* 2 Right */
-    {'w', -2, -2, -2, -2},              /* 2 Up */
-    {'a', -2, -2, -2, -2},              /* 2 Left */
-    {'z', -2, -2, -2, -2},              /* 2 Down */
-    {TABKEY, -2, -2, -2, -2},           /* 2 Fire */
-    {'t', -2, -2, -2, -2},              /* Cheat */
-    {ADDKEY, -2, -2, -2, -2},           /* Accelerate */
-    {SUBKEY, -2, -2, -2, -2},           /* Brake */
-    {F7KEY, -2, -2, -2, -2},            /* Music */
-    {F9KEY, -2, -2, -2, -2},            /* Sound */
-    {F10KEY, -2, -2, -2, -2},           /* Exit */
-    {' ', -2, -2, -2, -2}
-};              /* Pause */
-
-#define rightpressed  (GetAsyncKeyState(keycodes[0][0]))
-#define uppressed     (GetAsyncKeyState(keycodes[1][0]))
-#define leftpressed   (GetAsyncKeyState(keycodes[2][0]))
-#define downpressed   (GetAsyncKeyState(keycodes[3][0]))
-#define f1pressed     (GetAsyncKeyState(keycodes[4][0]))
-#define right2pressed (GetAsyncKeyState(keycodes[5][0]))
-#define up2pressed    (GetAsyncKeyState(keycodes[6][0]))
-#define left2pressed  (GetAsyncKeyState(keycodes[7][0]))
-#define down2pressed  (GetAsyncKeyState(keycodes[8][0]))
-#define f12pressed    (GetAsyncKeyState(keycodes[9][0]))
-
-#define ASCIIF8 F8KEY
-
-#else
-
 #ifdef _SDL
 
 bool GetAsyncKeyState(int);
@@ -186,13 +135,12 @@ int keycodes[17][5] = {{0x4d, 0xcd, 0x14d, -2, -2}, /* 1 Right */
 #define ASCIIF8 322
 
 #endif
-#endif
 
-#if !defined(_SDL) && !defined(_VGL)
+#if !defined(_SDL)
 static uint16_t scancode;
 #endif
 
-#if !defined(_WINDOWS) && !defined(_SDL) && !defined(_VGL)
+#if !defined(_WINDOWS) && !defined(_SDL)
 static int pki;
 
 static bool *flagp[10] =
@@ -220,7 +168,7 @@ void processkey(uint16_t key)
 }
 #endif
 
-#if !defined(_SDL) && !defined(_VGL)
+#if !defined(_SDL)
 /* This function exclusively used in keyboard redefinition */
 void findkey(int kn)
 {

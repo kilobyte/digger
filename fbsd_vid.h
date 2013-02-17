@@ -1,1 +1,0 @@
-void            savescreen(void);

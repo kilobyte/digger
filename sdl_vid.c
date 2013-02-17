@@ -400,18 +400,6 @@ void gretrace(void)
 {
 }
 
-void savescreen(void)
-{
-    /*  FILE *f;
-        int i;
-
-        f=fopen("screen.saw", "w");
-
-        for(i=0;i<(VGLDisplay->Xsize*VGLDisplay->Ysize);i++)
-                fputc(VGLDisplay->Bitmap[i], f);
-        fclose(f);*/
-}
-
 /*
  * Depreciated functions, necessary only to avoid "Undefined symbol:..." compiler
  * errors.

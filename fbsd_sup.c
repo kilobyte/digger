@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include "def.h"
-#include "hardware.h"
 
 void strupr(char *str)
 {
@@ -10,12 +9,4 @@ void strupr(char *str)
         *str = toupper(*str);
         str++;
     }
-}
-
-void catcher(int num)
-{
-    fprintf(stderr, "Signal %d catched, exitting\n", num);
-    graphicsoff();
-    restorekeyb();
-    exit(0);
 }

@@ -48,11 +48,7 @@ void shufflehigh(void);
 void writenum(int32_t n, int16_t x, int16_t y, int16_t w, int16_t c);
 static void numtostring(char *p, int32_t n);
 
-#if defined FREEBSD && defined _VGL
-
-#define SFNAME "/var/games/digger/digger.sco"
-
-#elif defined UNIX && !defined _VGL
+#if defined UNIX
 
 #define SFNAME strncat(strncpy(malloc(PATH_MAX),getenv("HOME"),PATH_MAX),"/.digger.sco",PATH_MAX)
 
