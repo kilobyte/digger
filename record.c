@@ -11,10 +11,6 @@
 #include "scores.h"
 #include "sprite.h"
 
-#ifdef _WINDOWS
-#include "win_dig.h"
-#endif
-
 char *recb, *plb, *plp;
 
 bool playing = false, savedrf = false, gotname = false, gotgame = false, drfvalid = true,
@@ -158,12 +154,7 @@ void recstart(void)
     if (recb == NULL)
     {
         finish();
-#ifdef _WINDOWS
-        MessageBox(hWnd, "Cannot allocate memory for recording buffer.\n", "Error",
-                   MB_OK);
-#else
         printf("Cannot allocate memory for recording buffer.\n");
-#endif
         exit(1);
     }
     recp = 0;

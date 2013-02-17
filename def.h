@@ -1,15 +1,6 @@
 #ifndef DEF_H
 #define DEF_H
 
-#ifdef GNU32
-#ifndef _WINDOWS
-#define _WINDOWS
-#endif
-#ifndef __WIN32__
-#define __WIN32__
-#endif
-#endif
-
 #if defined(__FreeBSD__) || defined(__linux__) || defined(__APPLE__) || defined YOUR_UNIX_LIKE_ARCH_GOING_HERE
 #define UNIX
 #endif
@@ -55,38 +46,12 @@
 #define INI_GAME_SETTINGS "Game"
 #define INI_GRAPHICS_SETTINGS "Graphics"
 #define INI_SOUND_SETTINGS "Sound"
-#ifdef _WINDOWS
-#define INI_KEY_SETTINGS "Win Keys"
-#else
 #define INI_KEY_SETTINGS "Keys"
-#endif
 
 /* using lesser buffer size will break ie. alsa on linux, no reason to use
  * lesser size anyways...
  */
 #define DEFAULT_BUFFER 2048
-#ifdef _WINDOWS
-#define DEF_SND_DEV 1
-#else
-#define DEF_SND_DEV 0
-#endif
-
-#if !defined (_MSVC) && defined (__WIN32__)
-#define _int64 LARGE_INTEGER
-#endif
-
-#ifdef __WIN32__
- #if defined (RUNTIMEDYNAMICLINK) && !defined (DIRECTX)
-  #define DIRECTX
- #endif
-#else
- #ifdef DIRECTX
-  #undef DIRECTX
- #endif
- #ifdef RUNTIMEDYNAMICLINK
-  #undef RUNTIMEDYNAMICLINK
- #endif
-#endif
 
 #if defined UNIX
 /* While SDL and other X11 related apps could be runned as ordinary user */
@@ -109,9 +74,7 @@
 #define strnicmp(x, y, z) strncasecmp(x, y, z)
 #endif
 
-#if defined _WINDOWS
-#define DIGGER_VERSION "TD WIN 19990707"
-#elif defined _SDL
+#if defined _SDL
 #define DIGGER_VERSION "POK SDL 20110912"
 #else
 #define DIGGER_VERSION "AJ DOS 19990506"

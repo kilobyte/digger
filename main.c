@@ -16,12 +16,6 @@
 #include "newsnd.h"
 #include "ini.h"
 
-#ifdef _WINDOWS
-#include "win_dig.h"
-#include "win_snd.h"
-#include "win_vid.h"
-#endif
-
 /* global variables */
 char pldispbuf[14];
 int16_t curplayer = 0, nplayers = 1, penalty = 0, diggers = 1, startlev = 1;
@@ -172,9 +166,6 @@ void game(void)
 {
     int16_t t, c, i;
     bool flashplayer = false;
-#ifdef _WINDOWS
-    show_game_menu();
-#endif
     if (gauntlet)
     {
         cgtime = gtime * 1193181l;
@@ -338,22 +329,17 @@ void maininit(void)
     recstart();
 }
 
-#ifndef _WINDOWS
 int main(int argc, char *argv[])
 {
     maininit();
     parsecmd(argc, argv);
     return mainprog();
 }
-#endif
 
 int mainprog(void)
 {
     int16_t frame, t, x = 0;
     loadscores();
-#ifdef _WINDOWS
-    show_main_menu();
-#endif
     escape = false;
     do
     {
@@ -460,9 +446,6 @@ int mainprog(void)
             break;
         recinit();
         game();
-#ifdef _WINDOWS
-        show_main_menu();
-#endif
         gotgame = true;
         if (gotname)
         {
@@ -484,9 +467,6 @@ void finish(void)
     soundkillglob();
     restorekeyb();
     graphicsoff();
-#ifdef _WINDOWS
-    windows_finish();
-#endif
 }
 
 void shownplayers(void)
@@ -697,7 +677,6 @@ void parsecmd(int argc, char *argv[])
                 sscanf(word + i, "%hi", &startlev);
             if (word[1] == 'U' || word[1] == 'u')
                 unlimlives = true;
-#ifndef _WINDOWS
             if (word[1] == '?' || word[1] == 'h' || word[1] == 'H')
             {
                 finish();
@@ -734,14 +713,12 @@ void parsecmd(int argc, char *argv[])
                        "/I = Start on a level other than 1\n");
                 exit(1);
             }
-#endif
             if (word[1] == 'Q' || word[1] == 'q')
                 soundflag = false;
             if (word[1] == 'M' || word[1] == 'm')
                 musicflag = false;
             if (word[1] == '2')
                 diggers = 2;
-#ifndef _WINDOWS
             if (word[1] == 'B' || word[1] == 'b' || word[1] == 'C' || word[1] == 'c')
             {
                 ginit = cgainit;
@@ -773,7 +750,6 @@ void parsecmd(int argc, char *argv[])
                 quiet = true;
             if (word[1] == 'V' || word[1] == 'v')
                 synchvid = true;
-#endif
             if (word[1] == 'G' || word[1] == 'g')
             {
                 gtime = 0;
@@ -873,10 +849,8 @@ char *keynames[17] = {"Right", "Up", "Left", "Down", "Fire",
                       "Cheat", "Accel", "Brake", "Music", "Sound", "Exit", "Pause"
                      };
 
-#ifndef _WINDOWS
 int dx_sound_volume;
 bool g_bWindowed, use_640x480_fullscreen, use_async_screen_updates;
-#endif
 
 void inir(void)
 {
@@ -921,7 +895,7 @@ void inir(void)
     }
     soundflag = GetINIBool(INI_SOUND_SETTINGS, "SoundOn", true, ININAME);
     musicflag = GetINIBool(INI_SOUND_SETTINGS, "MusicOn", true, ININAME);
-    sound_device = (int)GetINIInt(INI_SOUND_SETTINGS, "Device", DEF_SND_DEV, ININAME);
+    sound_device = (int)GetINIInt(INI_SOUND_SETTINGS, "Device", 0, ININAME);
     sound_port = (int)GetINIInt(INI_SOUND_SETTINGS, "Port", 544, ININAME);
     sound_irq = (int)GetINIInt(INI_SOUND_SETTINGS, "Irq", 5, ININAME);
     sound_dma = (int)GetINIInt(INI_SOUND_SETTINGS, "DMA", 1, ININAME);
@@ -944,23 +918,10 @@ void inir(void)
         timer2 = s1timer2;
         soundinitglob(sound_port, sound_irq, sound_dma, sound_length, sound_rate);
     }
-#ifdef _WINDOWS
-    dx_sound_volume = (int)GetINIInt(INI_SOUND_SETTINGS, "SoundVolume", 100, ININAME);
-    set_sound_volume(dx_sound_volume);
-#else
     dx_sound_volume = (int)GetINIInt(INI_SOUND_SETTINGS, "SoundVolume", 0, ININAME);
-#endif
-#ifndef DIRECTX
     g_bWindowed = true;
-#else
-    g_bWindowed = !GetINIBool(INI_GRAPHICS_SETTINGS, "FullScreen", false, ININAME);
-#endif
     use_640x480_fullscreen = GetINIBool(INI_GRAPHICS_SETTINGS, "640x480", false,
                                         ININAME);
-#ifdef DIRECTX
-    if (!g_bWindowed)
-        ChangeCoopLevel();
-#endif
     use_async_screen_updates = GetINIBool(INI_GRAPHICS_SETTINGS, "Async", true,
                                           ININAME);
     synchvid = GetINIBool(INI_GRAPHICS_SETTINGS, "Synch", false, ININAME);

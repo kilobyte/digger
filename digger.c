@@ -10,10 +10,6 @@
 #include "scores.h"
 #include "bags.h"
 
-#ifdef _WINDOWS
-#include "win_dig.h"
-#endif
-
 struct digger
 {
     int16_t x, y, h, v, rx, ry, mdir, dir, bagtime, rechargetime, fx, fy, fdir, expsn,
@@ -83,9 +79,6 @@ void newframe(void)
     {
         for (; curtime < ftime; curtime += 17094) /* 17094 = ticks in a refresh */
         {
-#ifdef _WINDOWS
-            do_windows_events();
-#endif
             fillbuffer();
             gretrace();
             checkkeyb();
@@ -97,9 +90,6 @@ void newframe(void)
     {
         do
         {
-#ifdef _WINDOWS
-            do_windows_events();
-#endif
             fillbuffer();             /* Idle time */
             t = gethrt();
             checkkeyb();
