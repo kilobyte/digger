@@ -70,7 +70,6 @@ void drawstatics(void)
                 field[y * MWIDTH + x] = field1[y * MWIDTH + x];
             else
                 field[y * MWIDTH + x] = field2[y * MWIDTH + x];
-    setretr(true);
     gpal(0);
     ginten(0);
     drawbackg(levplan());

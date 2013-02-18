@@ -231,7 +231,6 @@ void endofgame(void)
         for (i = 0; i < 50 && !escape; i++)
             newframe();
         outtext("         ", 104, 0, 3);
-        setretr(true);
     }
 }
 
@@ -307,14 +306,12 @@ static void getinitials(void)
     gclear();
     gpal(0);
     ginten(0);
-    setretr(true);
     recputinit(scoreinit[0]);
 }
 
 static void flashywait(int16_t n)
 {
     int16_t i, cx, p = 0;
-    setretr(false);
     for (i = 0; i < (n << 1); i++)
         for (cx = 0; cx < volume; cx++)
             gpal(p = 1 - p);

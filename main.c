@@ -324,7 +324,6 @@ static void maininit(void)
     calibrate();
     ginit();
     gpal(0);
-    setretr(true);
     initkeyb();
     detectjoy();
     inir();
@@ -468,7 +467,6 @@ void finish(void)
     killsound();
     soundoff();
     soundkillglob();
-    restorekeyb();
     graphicsoff();
 }
 

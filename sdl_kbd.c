@@ -60,10 +60,6 @@ void initkeyb(void)
     SDL_SetEventFilter(Handler);
 }
 
-void restorekeyb(void)
-{
-}
-
 int16_t getkey(void)
 {
     int16_t result;

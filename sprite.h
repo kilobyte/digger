@@ -1,4 +1,3 @@
-void setretr(bool f);
 void movedrawspr(int16_t n, int16_t x, int16_t y);
 void erasespr(int16_t n);
 void createspr(int16_t n, int16_t ch, uint8_t *mov, int16_t wid, int16_t hei, int16_t bwid,

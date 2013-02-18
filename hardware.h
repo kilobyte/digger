@@ -18,7 +18,6 @@ void s1initint8(void);
 void s1restoreint8(void);
 
 void initkeyb(void);
-void restorekeyb(void);
 int16_t getkey(void);
 bool kbhit(void);
 

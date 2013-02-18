@@ -40,10 +40,6 @@ int16_t (*ggetpix)(int16_t x, int16_t y) = vgagetpix;
 void (*gtitle)(void) = vgatitle;
 void (*gwrite)(int16_t x, int16_t y, int16_t ch, int16_t c) = vgawrite;
 
-void setretr(bool f)
-{
-}
-
 void createspr(int16_t n, int16_t ch, uint8_t *mov, int16_t wid, int16_t hei, int16_t bwid,
                int16_t bhei)
 {
