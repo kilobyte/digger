@@ -10,16 +10,17 @@
 #include "scores.h"
 #include "record.h"
 
-struct monster
+static struct monster
 {
     int16_t x, y, h, v, xr, yr, dir, hdir, t, hnt, death, bag, dtime, stime, chase;
     bool flag, nob, alive;
 } mondat[6];
 
-int16_t nextmonster = 0, totalmonsters = 0, maxmononscr = 0, nextmontime = 0, mongaptime = 0;
-int16_t chase = 0;
+static int16_t nextmonster = 0, totalmonsters = 0, maxmononscr = 0,
+               nextmontime = 0, mongaptime = 0;
+static int16_t chase = 0;
 
-bool unbonusflag = false;
+static bool unbonusflag = false;
 
 static void createmonster(void);
 static void monai(int16_t mon);
@@ -138,7 +139,7 @@ static void createmonster(void)
         }
 }
 
-bool mongotgold = false;
+static bool mongotgold = false;
 
 void mongold(void)
 {

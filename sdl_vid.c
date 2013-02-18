@@ -23,55 +23,55 @@
 extern uint8_t *vgatable[];
 extern uint8_t *ascii2vga[];
 
-uint8_t **sprites = vgatable;
-uint8_t **alphas = ascii2vga;
+static uint8_t **sprites = vgatable;
+static uint8_t **alphas = ascii2vga;
 
-int16_t xratio = 2;
-int16_t yratio = 2;
-int16_t yoffset = 0;
-int16_t hratio = 2;
-int16_t wratio = 2;
+static int16_t xratio = 2;
+static int16_t yratio = 2;
+static int16_t yoffset = 0;
+static int16_t hratio = 2;
+static int16_t wratio = 2;
 #define virt2scrx(x) (x*xratio)
 #define virt2scry(y) (y*yratio+yoffset)
 #define virt2scrw(w) (w*wratio)
 #define virt2scrh(h) (h*hratio)
 
 /* palette1, normal intensity */
-SDL_Color vga16_pal1[] = \
+static SDL_Color vga16_pal1[] = \
 {
     {0, 0, 0, 0}, {0, 0, 128, 0}, {0, 128, 0, 0}, {0, 128, 128, 0}, {128, 0, 0, 0}, {128, 0, 128, 0} \
     , {128, 64, 0, 0}, {128, 128, 128, 0}, {64, 64, 64, 0}, {0, 0, 255, 0}, {0, 255, 0, 0} \
     , {0, 255, 255, 0}, {255, 0, 0, 0}, {255, 0, 255, 0}, {255, 255, 0, 0}, {255, 255, 255, 0}
 };
 /* palette1, high intensity */
-SDL_Color vga16_pal1i[] = \
+static SDL_Color vga16_pal1i[] = \
 {
     {0, 0, 0, 0}, {0, 0, 255, 0}, {0, 255, 0, 0}, {0, 255, 255, 0}, {255, 0, 0, 0}, {255, 0, 255, 0} \
     , {255, 128, 0, 0}, {196, 196, 196, 0}, {128, 128, 128, 0}, {128, 128, 255, 0}, {128, 255, 128, 0} \
     , {128, 255, 255, 0}, {255, 128, 128, 0}, {255, 128, 255, 0}, {255, 255, 128, 0}, {255, 255, 255, 0}
 };
 /* palette2, normal intensity */
-SDL_Color vga16_pal2[] = \
+static SDL_Color vga16_pal2[] = \
 {
     {0, 0, 0, 0}, {0, 128, 0, 0}, {128, 0, 0, 0}, {128, 64, 0, 0}, {0, 0, 128, 0}, {0, 128, 128, 0} \
     , {128, 0, 128, 0}, {128, 128, 128, 0}, {64, 64, 64, 0}, {0, 255, 0, 0}, {255, 0, 0, 0} \
     , {255, 255, 0, 0}, {0, 0, 255, 0}, {0, 255, 255, 0}, {255, 0, 255, 0}, {255, 255, 255, 0}
 };
 /* palette2, high intensity */
-SDL_Color vga16_pal2i[] = \
+static SDL_Color vga16_pal2i[] = \
 {
     {0, 0, 0, 0}, {0, 255, 0, 0}, {255, 0, 0, 0}, {255, 128, 0, 0}, {0, 0, 255, 0}, {0, 255, 255, 0} \
     , {255, 0, 255, 0}, {196, 196, 196, 0}, {128, 128, 128, 0}, {128, 255, 128, 0}, {255, 128, 128, 0} \
     , {255, 255, 128, 0}, {128, 128, 255, 0}, {128, 255, 255, 0}, {255, 128, 255, 0}, {255, 255, 255, 0}
 };
 
-SDL_Color *npalettes[] = {vga16_pal1, vga16_pal2};
-SDL_Color *ipalettes[] = {vga16_pal1i, vga16_pal2i};
-int16_t currpal = 0;
+static SDL_Color *npalettes[] = {vga16_pal1, vga16_pal2};
+static SDL_Color *ipalettes[] = {vga16_pal1i, vga16_pal2i};
+static int16_t currpal = 0;
 
-uint32_t        addflag = 0;
+static uint32_t addflag = 0;
 
-SDL_Surface *screen = NULL;
+static SDL_Surface *screen = NULL;
 
 /* Data structure holding pending updates */
 struct PendNode
@@ -81,9 +81,9 @@ struct PendNode
     SDL_Rect rect;
 };
 
-struct PendNode *First = NULL, *Last = NULL;
+static struct PendNode *First = NULL, *Last = NULL;
 
-int pendnum = 0;
+static int pendnum = 0;
 
 static SDL_Surface *ch2bmap(uint8_t *sprite, int16_t w, int16_t h)
 {

@@ -11,16 +11,16 @@
 #include "scores.h"
 #include "sprite.h"
 
-char *recb, *plb, *plp;
+static char *recb, *plb, *plp;
 
 bool playing = false, savedrf = false, gotname = false, gotgame = false, drfvalid = true,
      kludge = false;
 
-char rname[128];
+static char rname[128];
 
-int reccc = 0, recrl = 0, rlleft = 0;
-uint32_t recp = 0;
-char recd, rld;
+static int reccc = 0, recrl = 0, rlleft = 0;
+static uint32_t recp = 0;
+static char recd, rld;
 
 static void mprintf(char *f, ...);
 static void makedir(int16_t *dir, bool *fire, char d);

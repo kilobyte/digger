@@ -182,8 +182,8 @@ void clearfire(int n)
         af12pressed = false;
 }
 
-bool oupressed = false, odpressed = false, olpressed = false, orpressed = false;
-bool ou2pressed = false, od2pressed = false, ol2pressed = false, or2pressed = false;
+static bool oupressed = false, odpressed = false, olpressed = false, orpressed = false;
+static bool ou2pressed = false, od2pressed = false, ol2pressed = false, or2pressed = false;
 
 void readdirect(int n)
 {

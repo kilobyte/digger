@@ -10,20 +10,21 @@
 #include "scores.h"
 #include "bags.h"
 
-struct digger
+static struct digger
 {
     int16_t x, y, h, v, rx, ry, mdir, dir, bagtime, rechargetime, fx, fy, fdir, expsn,
             deathstage, deathbag, deathani, deathtime, emocttime, emn, msc, lives, ivt;
     bool notfiring, alive, firepressed, dead, levdone, invin;
 } digdat[DIGGERS];
 
-int16_t startbonustimeleft = 0, bonustimeleft;
+static int16_t startbonustimeleft = 0, bonustimeleft;
 
-int16_t emmask = 0;
+static int16_t emmask = 0;
 
-int8_t emfield[MSIZE];
+static int8_t emfield[MSIZE];
 
-bool bonusvisible = false, bonusmode = false, digvisible;
+bool bonusvisible = false, bonusmode = false;
+static bool digvisible;
 
 static void updatedigger(int n);
 static void diggerdie(int n);
@@ -498,7 +499,7 @@ void sceatm(int n)
     digdat[n].msc <<= 1;
 }
 
-int16_t deatharc[7] = {3, 5, 6, 6, 5, 3, 0};
+static const int16_t deatharc[7] = {3, 5, 6, 6, 5, 3, 0};
 
 static void diggerdie(int n)
 {
@@ -727,7 +728,7 @@ void drawemeralds(void)
                 drawemerald(x * 20 + 12, y * 18 + 21);
 }
 
-int16_t embox[8] = {8, 12, 12, 9, 16, 12, 6, 9};
+static const int16_t embox[8] = {8, 12, 12, 9, 16, 12, 6, 9};
 
 bool hitemerald(int16_t x, int16_t y, int16_t rx, int16_t ry, int16_t dir)
 {

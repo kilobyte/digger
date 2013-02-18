@@ -15,15 +15,15 @@
    If DMA is used, doubling the buffer so the data is always continguous, and
    giving half of the buffer at once to the DMA driver may be a good idea. */
 
-uint8_t *buffer;
-uint16_t firsts, last, size;         /* data available to output device */
+static uint8_t *buffer;
+static uint16_t firsts, last, size;     /* data available to output device */
 
-int rate;
-uint16_t t0rate, t2rate, t2new, t0v, t2v;
-int16_t i8pulse = 0;
-bool t2f = false, t2sw, i8flag = false;
-uint8_t lut[257];
-uint16_t pwlut[51];
+static int rate;
+static uint16_t t0rate, t2rate, t2new, t0v, t2v;
+static int16_t i8pulse = 0;
+static bool t2f = false, t2sw, i8flag = false;
+static uint8_t lut[257];
+static uint16_t pwlut[51];
 
 extern int16_t spkrmode, pulsewidth;
 

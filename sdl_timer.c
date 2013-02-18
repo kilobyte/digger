@@ -3,7 +3,7 @@
 #include "def.h"
 #include "sdl_vid.h"
 
-uint32_t prev = 0;
+static uint32_t prev = 0;
 extern uint32_t ftime;
 
 void inittimer(void)

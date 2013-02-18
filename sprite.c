@@ -3,24 +3,22 @@
 #include "sprite.h"
 #include "hardware.h"
 
-bool retrflag = true;
-
-bool sprrdrwf[SPRITES + 1];
-bool sprrecf[SPRITES + 1];
-bool sprenf[SPRITES];
-int16_t sprch[SPRITES + 1];
-uint8_t *sprmov[SPRITES];
-int16_t sprx[SPRITES + 1];
-int16_t spry[SPRITES + 1];
-int16_t sprwid[SPRITES + 1];
-int16_t sprhei[SPRITES + 1];
-int16_t sprbwid[SPRITES];
-int16_t sprbhei[SPRITES];
-int16_t sprnch[SPRITES];
-int16_t sprnwid[SPRITES];
-int16_t sprnhei[SPRITES];
-int16_t sprnbwid[SPRITES];
-int16_t sprnbhei[SPRITES];
+static bool sprrdrwf[SPRITES + 1];
+static bool sprrecf[SPRITES + 1];
+static bool sprenf[SPRITES];
+static int16_t sprch[SPRITES + 1];
+static uint8_t *sprmov[SPRITES];
+static int16_t sprx[SPRITES + 1];
+static int16_t spry[SPRITES + 1];
+static int16_t sprwid[SPRITES + 1];
+static int16_t sprhei[SPRITES + 1];
+static int16_t sprbwid[SPRITES];
+static int16_t sprbhei[SPRITES];
+static int16_t sprnch[SPRITES];
+static int16_t sprnwid[SPRITES];
+static int16_t sprnhei[SPRITES];
+static int16_t sprnbwid[SPRITES];
+static int16_t sprnbhei[SPRITES];
 
 static void clearrdrwf(void);
 static void clearrecf(void);
@@ -44,7 +42,6 @@ void (*gwrite)(int16_t x, int16_t y, int16_t ch, int16_t c) = vgawrite;
 
 void setretr(bool f)
 {
-    retrflag = f;
 }
 
 void createspr(int16_t n, int16_t ch, uint8_t *mov, int16_t wid, int16_t hei, int16_t bwid,
@@ -253,8 +250,10 @@ static void putis(void)
 }
 
 int first[TYPES], coll[SPRITES];
-int firstt[TYPES] = {FIRSTBONUS, FIRSTBAG, FIRSTMONSTER, FIRSTFIREBALL, FIRSTDIGGER};
-int lastt[TYPES] = {LASTBONUS, LASTBAG, LASTMONSTER, LASTFIREBALL, LASTDIGGER};
+static const int firstt[TYPES] =
+{FIRSTBONUS, FIRSTBAG, FIRSTMONSTER, FIRSTFIREBALL, FIRSTDIGGER};
+static const int lastt[TYPES] =
+{LASTBONUS, LASTBAG, LASTMONSTER, LASTFIREBALL, LASTDIGGER};
 
 static void bcollides(int spr)
 {

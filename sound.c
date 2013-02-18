@@ -8,13 +8,14 @@
 #include <SDL.h>
 #include "sdl_snd.h"
 
-int16_t wavetype = 0, musvol = 0;
+static int16_t wavetype = 0, musvol = 0;
 int16_t spkrmode = 0, timerrate = 0x7d0;
-uint16_t timercount = 0, t2val = 0, t0val = 0;
+uint16_t timercount = 0;
+static uint16_t t2val = 0, t0val = 0;
 int16_t pulsewidth = 1;
 int16_t volume = 0;
 
-int8_t timerclock = 0;
+static int8_t timerclock = 0;
 
 bool soundflag = true, musicflag = true;
 
@@ -61,9 +62,9 @@ void (*settimer2)(uint16_t t2v) = s0settimer2;
 void (*timer2)(uint16_t t2v) = s0timer2;
 void (*soundkillglob)(void) = s0soundkillglob;
 
-bool sndflag = false, soundpausedflag = false;
+static bool sndflag = false, soundpausedflag = false;
 
-int32_t randvs;
+static int32_t randvs;
 
 static int16_t randnos(int16_t n)
 {
@@ -139,8 +140,8 @@ void soundstop(void)
 }
 
 
-bool soundlevdoneflag = false;
-int16_t nljpointer = 0, nljnoteduration = 0;
+static bool soundlevdoneflag = false;
+static int16_t nljpointer = 0, nljnoteduration = 0;
 
 void soundlevdone(void)
 {
@@ -168,9 +169,8 @@ static void soundlevdoneoff(void)
     soundlevdoneflag = soundpausedflag = false;
 }
 
-int16_t newlevjingle[11] = {0x8e8, 0x712, 0x5f2, 0x7f0, 0x6ac, 0x54c,
-                            0x712, 0x5f2, 0x4b8, 0x474, 0x474
-                           };
+static const int16_t newlevjingle[] =
+{0x8e8, 0x712, 0x5f2, 0x7f0, 0x6ac, 0x54c, 0x712, 0x5f2, 0x4b8, 0x474, 0x474};
 
 static void soundlevdoneupdate(void)
 {
@@ -198,8 +198,8 @@ static void soundlevdoneupdate(void)
 }
 
 
-bool soundfallflag = false, soundfallf = false;
-int16_t soundfallvalue, soundfalln = 0;
+static bool soundfallflag = false, soundfallf = false;
+static int16_t soundfallvalue, soundfalln = 0;
 
 void soundfall(void)
 {
@@ -238,8 +238,8 @@ static void soundfallupdate(void)
 }
 
 
-bool soundbreakflag = false;
-int16_t soundbreakduration = 0, soundbreakvalue = 0;
+static bool soundbreakflag = false;
+static int16_t soundbreakduration = 0, soundbreakvalue = 0;
 
 void soundbreak(void)
 {
@@ -269,8 +269,8 @@ static void soundbreakupdate(void)
 }
 
 
-bool soundwobbleflag = false;
-int16_t soundwobblen = 0;
+static bool soundwobbleflag = false;
+static int16_t soundwobblen = 0;
 
 void soundwobble(void)
 {
@@ -307,9 +307,9 @@ static void soundwobbleupdate(void)
 }
 
 
-bool soundfireflag[FIREBALLS] = {false, false}, sff[FIREBALLS];
-int16_t soundfirevalue[FIREBALLS], soundfiren[FIREBALLS] = {0, 0};
-int soundfirew = 0;
+static bool soundfireflag[FIREBALLS] = {false, false}, sff[FIREBALLS];
+static int16_t soundfirevalue[FIREBALLS], soundfiren[FIREBALLS] = {0, 0};
+static int soundfirew = 0;
 
 void soundfire(int n)
 {
@@ -359,9 +359,9 @@ static void soundfireupdate(void)
 }
 
 
-bool soundexplodeflag[FIREBALLS] = {false, false}, sef[FIREBALLS];
-int16_t soundexplodevalue[FIREBALLS], soundexplodeduration[FIREBALLS];
-int soundexplodew = 0;
+static bool soundexplodeflag[FIREBALLS] = {false, false}, sef[FIREBALLS];
+static int16_t soundexplodevalue[FIREBALLS], soundexplodeduration[FIREBALLS];
+static int soundexplodew = 0;
 
 void soundexplode(int n)
 {
@@ -410,8 +410,8 @@ static void soundexplodeupdate(void)
 }
 
 
-bool soundbonusflag = false;
-int16_t soundbonusn = 0;
+static bool soundbonusflag = false;
+static int16_t soundbonusn = 0;
 
 void soundbonus(void)
 {
@@ -439,7 +439,7 @@ static void soundbonusupdate(void)
 }
 
 
-bool soundemflag = false;
+static bool soundemflag = false;
 
 void soundem(void)
 {
@@ -461,10 +461,11 @@ static void soundemupdate(void)
 }
 
 
-bool soundemeraldflag = false;
-int16_t soundemeraldduration, emerfreq, soundemeraldn;
+static bool soundemeraldflag = false;
+static int16_t soundemeraldduration, emerfreq, soundemeraldn;
 
-int16_t emfreqs[8] = {0x8e8, 0x7f0, 0x712, 0x6ac, 0x5f2, 0x54c, 0x4b8, 0x474};
+static const int16_t emfreqs[8] =
+{0x8e8, 0x7f0, 0x712, 0x6ac, 0x5f2, 0x54c, 0x4b8, 0x474};
 
 void soundemerald(int n)
 {
@@ -500,8 +501,8 @@ static void soundemeraldupdate(void)
 }
 
 
-bool soundgoldflag = false, soundgoldf = false;
-int16_t soundgoldvalue1, soundgoldvalue2, soundgoldduration;
+static bool soundgoldflag = false, soundgoldf = false;
+static int16_t soundgoldvalue1, soundgoldvalue2, soundgoldduration;
 
 void soundgold(void)
 {
@@ -542,8 +543,8 @@ static void soundgoldupdate(void)
 
 
 
-bool soundeatmflag = false;
-int16_t soundeatmvalue, soundeatmduration, soundeatmn;
+static bool soundeatmflag = false;
+static int16_t soundeatmvalue, soundeatmduration, soundeatmn;
 
 void soundeatm(void)
 {
@@ -586,8 +587,8 @@ static void soundeatmupdate(void)
 }
 
 
-bool soundddieflag = false;
-int16_t soundddien, soundddievalue;
+static bool soundddieflag = false;
+static int16_t soundddien, soundddievalue;
 
 void soundddie(void)
 {
@@ -619,8 +620,8 @@ static void soundddieupdate(void)
 }
 
 
-bool sound1upflag = false;
-int16_t sound1upduration = 0;
+static bool sound1upflag = false;
+static int16_t sound1upduration = 0;
 
 void sound1up(void)
 {
@@ -646,10 +647,11 @@ static void sound1upupdate(void)
 }
 
 
-bool musicplaying = false;
-int16_t musicp = 0, tuneno = 0, noteduration = 0, notevalue = 0, musicmaxvol = 0,
-        musicattackrate = 0, musicsustainlevel = 0, musicdecayrate = 0, musicnotewidth = 0,
-        musicreleaserate = 0, musicstage = 0, musicn = 0;
+static bool musicplaying = false;
+static int16_t musicp = 0, tuneno = 0, noteduration = 0, notevalue = 0,
+               musicmaxvol = 0, musicattackrate = 0, musicsustainlevel = 0,
+               musicdecayrate = 0, musicnotewidth = 0, musicreleaserate = 0,
+               musicstage = 0, musicn = 0;
 
 void music(int16_t tune)
 {
@@ -690,7 +692,7 @@ void musicoff(void)
     musicp = 0;
 }
 
-int16_t bonusjingle[321] =
+static const int16_t bonusjingle[] =
 {
     0x11d1, 2, 0x11d1, 2, 0x11d1, 4, 0x11d1, 2, 0x11d1, 2, 0x11d1, 4, 0x11d1, 2, 0x11d1, 2,
     0xd59, 4, 0xbe4, 4, 0xa98, 4, 0x11d1, 2, 0x11d1, 2, 0x11d1, 4, 0x11d1, 2, 0x11d1, 2,
@@ -715,7 +717,7 @@ int16_t bonusjingle[321] =
     0x7d64
 };
 
-int16_t backgjingle[291] =
+static const int16_t backgjingle[] =
 {
     0xfdf, 2, 0x11d1, 2, 0xfdf, 2, 0x1530, 2, 0x1ab2, 2, 0x1530, 2, 0x1fbf, 4, 0xfdf, 2,
     0x11d1, 2, 0xfdf, 2, 0x1530, 2, 0x1ab2, 2, 0x1530, 2, 0x1fbf, 4, 0xfdf, 2, 0xe24, 2,
@@ -738,7 +740,7 @@ int16_t backgjingle[291] =
     0xa98, 4, 0x7d64
 };
 
-int16_t dirge[] =
+static const int16_t dirge[] =
 {
     0x7d00, 2, 0x11d1, 6, 0x11d1, 4, 0x11d1, 2, 0x11d1, 6, 0xefb, 4, 0xfdf, 2,
     0xfdf, 4, 0x11d1, 2, 0x11d1, 4, 0x12e0, 2, 0x11d1, 12, 0x7d00, 16, 0x7d00, 16,
@@ -850,7 +852,7 @@ static void sett0(void)
     }
 }
 
-bool soundt0flag = false;
+static bool soundt0flag = false;
 
 void setsoundt2(void)
 {
@@ -872,7 +874,7 @@ static void setsoundmode(void)
     }
 }
 
-bool int8flag = false;
+static bool int8flag = false;
 
 void startint8(void)
 {

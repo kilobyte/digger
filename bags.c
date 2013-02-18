@@ -9,13 +9,13 @@
 #include "digger.h"
 #include "scores.h"
 
-struct bag
+static struct bag
 {
     int16_t x, y, h, v, xr, yr, dir, wt, gt, fallh;
     bool wobbling, unfallen, exist;
 } bagdat1[BAGS], bagdat2[BAGS], bagdat[BAGS];
 
-int16_t pushcount = 0, goldtime = 0;
+static int16_t pushcount = 0, goldtime = 0;
 
 static void updatebag(int16_t bag);
 static void baghitground(int16_t bag);
@@ -138,7 +138,7 @@ void dobags(void)
         soundwobbleoff();
 }
 
-int16_t wblanim[4] = {2, 0, 1, 0};
+static const int16_t wblanim[4] = {2, 0, 1, 0};
 
 static void updatebag(int16_t bag)
 {

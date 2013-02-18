@@ -17,8 +17,8 @@
 #include "sdl_vid.h"
 
 #define KBLEN           30
-int16_t kbuffer[KBLEN];
-int16_t klen = 0;
+static int16_t kbuffer[KBLEN];
+static int16_t klen = 0;
 
 static int Handler(const SDL_Event *event)
 {

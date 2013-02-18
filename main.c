@@ -18,7 +18,7 @@
 
 /* global variables */
 char pldispbuf[14];
-int16_t curplayer = 0, nplayers = 1, penalty = 0, diggers = 1, startlev = 1;
+int16_t curplayer = 0, nplayers = 1, diggers = 1, startlev = 1;
 bool unlimlives = false, gauntlet = false, timeout = false;
 int gtime = 0;
 
@@ -28,7 +28,10 @@ static struct game
     bool levdone;
 } gamedat[2];
 
+static int16_t penalty = 0;
 static bool levnotdrawn = false, alldead = false, started;
+
+static int32_t randv;
 
 char levfname[132];
 bool levfflag = false;
@@ -612,7 +615,7 @@ static void calibrate(void)
         volume = 1;
 }
 
-uint16_t sound_device, sound_port, sound_irq, sound_dma, sound_rate, sound_length;
+static uint16_t sound_device, sound_port, sound_irq, sound_dma, sound_rate, sound_length;
 
 static void parsecmd(int argc, char *argv[])
 {
@@ -830,21 +833,21 @@ static void parsecmd(int argc, char *argv[])
     }
 }
 
-int32_t randv;
-
 int16_t randno(int16_t n)
 {
     randv = randv * 0x15a4e35l + 1;
     return (int16_t)((randv & 0x7fffffffl) % n);
 }
 
-char *keynames[17] = {"Right", "Up", "Left", "Down", "Fire",
-                      "Right", "Up", "Left", "Down", "Fire",
-                      "Cheat", "Accel", "Brake", "Music", "Sound", "Exit", "Pause"
-                     };
+static const char *keynames[17] =
+{
+    "Right", "Up", "Left", "Down", "Fire",
+    "Right", "Up", "Left", "Down", "Fire",
+    "Cheat", "Accel", "Brake", "Music", "Sound", "Exit", "Pause"
+};
 
-int dx_sound_volume;
-bool g_bWindowed, use_640x480_fullscreen, use_async_screen_updates;
+static int dx_sound_volume;
+static bool g_bWindowed, use_640x480_fullscreen, use_async_screen_updates;
 
 static void inir(void)
 {

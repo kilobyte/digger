@@ -9,19 +9,22 @@
 #include "digger.h"
 #include "sound.h"
 
-int16_t field1[MSIZE], field2[MSIZE], field[MSIZE];
+static int16_t field1[MSIZE], field2[MSIZE];
+int16_t field[MSIZE];
 
-uint8_t monbufs[MONSTERS][480], bagbufs[BAGS][480], bonusbufs[BONUSES][480],
-        diggerbufs[DIGGERS][480], firebufs[FIREBALLS][128];
+static uint8_t monbufs[MONSTERS][480], bagbufs[BAGS][480], bonusbufs[BONUSES][480],
+       diggerbufs[DIGGERS][480], firebufs[FIREBALLS][128];
 
-uint16_t bitmasks[12] = {0xfffe, 0xfffd, 0xfffb, 0xfff7, 0xffef, 0xffdf, 0xffbf, 0xff7f,
-                         0xfeff, 0xfdff, 0xfbff, 0xf7ff
-                        };
+static const uint16_t bitmasks[12] =
+{
+    0xfffe, 0xfffd, 0xfffb, 0xfff7, 0xffef, 0xffdf,
+    0xffbf, 0xff7f, 0xfeff, 0xfdff, 0xfbff, 0xf7ff,
+};
 
-int16_t monspr[MONSTERS];
-int16_t monspd[MONSTERS];
+static int16_t monspr[MONSTERS];
+static int16_t monspd[MONSTERS];
 
-int16_t digspr[DIGGERS], digspd[DIGGERS], firespr[FIREBALLS];
+static int16_t digspr[DIGGERS], digspd[DIGGERS], firespr[FIREBALLS];
 
 static void drawlife(int16_t t, int16_t x, int16_t y);
 static void createdbfspr(void);
@@ -29,7 +32,7 @@ static void initdbfspr(void);
 static void drawbackg(int16_t l);
 static void drawfield(void);
 
-void outtext(char *p, int16_t x, int16_t y, int16_t c)
+void outtext(const char *p, int16_t x, int16_t y, int16_t c)
 {
     int16_t i;
     for (i = 0; p[i]; i++)
