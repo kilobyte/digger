@@ -4,8 +4,6 @@
 #include <strings.h>
 #include "def.h"
 
-#define NEWL "\r\n"
-
 /* Get a line from a buffer. This should be compatible with all 3 text file
    formats: DOS, Unix and Mac. */
 static char *sgets(char *buffer, char *s)
@@ -28,14 +26,14 @@ void WriteINIString(char *section, char *key, char *value, char *filename)
     FILE *fp;
     char *buffer, *p, *p0, s1[80], s2[80], s3[80];
     int tl;
-    fp = fopen(filename, "rb");
+    fp = fopen(filename, "r");
     if (fp == NULL)
     {
-        fp = fopen(filename, "wb");
+        fp = fopen(filename, "w");
         if (fp == NULL)
             return;
-        fprintf(fp, "[%s]" NEWL, section);
-        fprintf(fp, "%s=%s" NEWL NEWL, key, value);
+        fprintf(fp, "[%s]\n", section);
+        fprintf(fp, "%s=%s\n\n", key, value);
         fclose(fp);
         return;
     }
@@ -68,14 +66,14 @@ void WriteINIString(char *section, char *key, char *value, char *filename)
                 p = sgets(p, s1);
                 if (strnicmp(s1, s3, strlen(s3)) == 0)
                 {
-                    fp = fopen(filename, "wb");
+                    fp = fopen(filename, "w");
                     if (fp == NULL)
                     {
                         free(buffer);
                         return;
                     }
                     fwrite(buffer, p0 - buffer, 1, fp);
-                    fprintf(fp, "%s=%s" NEWL, key, value);
+                    fprintf(fp, "%s=%s\n", key, value);
                     fwrite(p, tl - (p - buffer), 1, fp);
                     fclose(fp);
                     free(buffer);
@@ -83,14 +81,14 @@ void WriteINIString(char *section, char *key, char *value, char *filename)
                 }
             }
             while (s1[0] != 0);
-            fp = fopen(filename, "wb");
+            fp = fopen(filename, "w");
             if (fp == NULL)
             {
                 free(buffer);
                 return;
             }
             fwrite(buffer, p0 - buffer, 1, fp);
-            fprintf(fp, "%s=%s" NEWL, key, value);
+            fprintf(fp, "%s=%s\n", key, value);
             fwrite(p0, tl - (p0 - buffer), 1, fp);
             fclose(fp);
             free(buffer);
@@ -98,14 +96,14 @@ void WriteINIString(char *section, char *key, char *value, char *filename)
         }
     }
     while (p < buffer + tl);
-    fp = fopen(filename, "wb");
+    fp = fopen(filename, "w");
     if (fp == NULL)
     {
         free(buffer);
         return;
     }
-    fprintf(fp, "[%s]" NEWL, section);
-    fprintf(fp, "%s=%s" NEWL NEWL, key, value);
+    fprintf(fp, "[%s]\n", section);
+    fprintf(fp, "%s=%s\n\n", key, value);
     fwrite(buffer, tl, 1, fp);
     fclose(fp);
     free(buffer);
@@ -122,7 +120,7 @@ void GetINIString(char *section, char *key, char *def, char *dest,
      */
     if (dest != def)
         strcpy(dest, def);
-    fp = fopen(filename, "rb");
+    fp = fopen(filename, "r");
     if (fp == NULL)
         return;
     strcpy(s2, "[");
