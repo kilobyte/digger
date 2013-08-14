@@ -875,8 +875,7 @@ static void inir(void)
     ftime = GetINIInt(INI_GAME_SETTINGS, "Speed", 80000l, ININAME);
     gauntlet = GetINIBool(INI_GAME_SETTINGS, "GauntletMode", false, ININAME);
     GetINIString(INI_GAME_SETTINGS, "Players", "1", vbuf, 80, ININAME);
-    strupr(vbuf);
-    if (vbuf[0] == '2' && vbuf[1] == 'S')
+    if (vbuf[0] == '2' && (vbuf[1] == 'S' || vbuf[1] == 's'))
     {
         diggers = 2;
         nplayers = 1;

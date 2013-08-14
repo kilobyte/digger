@@ -65,10 +65,6 @@
 #define ININAME "DIGGER.INI"
 #endif
 
-#if defined(__FreeBSD__) || defined(__linux__) || defined(__APPLE__)
-#include "fbsd_sup.h"
-#endif
-
 #ifdef UNIX
 #define stricmp(x, y) strcasecmp(x, y)
 #define strnicmp(x, y, z) strncasecmp(x, y, z)

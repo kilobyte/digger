@@ -17,14 +17,12 @@ ESUFFIX	=  .exe
 endif
 
 ifeq ($(ARCH),"FREEBSD")
-OBJS	+= fbsd_sup.o	# strup()
 RCFLAGS	+= -DFREEBSD $(shell sdl-config --cflags)
 LIBS	+= $(shell sdl-config --libs) -lz
 ESUFFIX	=
 endif
 
 ifeq ($(ARCH),"LINUX")
-OBJS	+= fbsd_sup.o	# strup()
 RCFLAGS	+= -DLINUX $(shell sdl-config --cflags)
 LIBS	+= $(shell sdl-config --libs) -lz
 ESUFFIX	=

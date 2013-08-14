@@ -554,10 +554,6 @@ it.
     etc), then replace "YOUR_UNIX_LIKE_ARCH_GOING_HERE" with actual name of
     your OS.
 
-*   If your system doesn't have strup() function then add its name to the
-    section where "fbsd_sup.h" being included and make sure that you have added
-    fbsd_sup.c to the list of object files for your system in the Makefile.sdl.
-
 *   If your system doesn't have stricmp() and strnicmp() string-comparing
     functions, but instead has strcasecmp() and strncasecmp() then add the name
     of your OS to the appropriate section of Makefile.sdl.
