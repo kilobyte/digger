@@ -9,13 +9,9 @@
 static char *sgets(char *buffer, char *s)
 {
     int i;
-    for (i = 0; buffer[i] != 10 && buffer[i] != 13 && buffer[i] != 0; i++)
+    for (i = 0; buffer[i] && buffer[i] != '\n'; i++)
         s[i] = buffer[i];
     s[i] = 0;
-    if (buffer[i] == 13)
-        i++;
-    if (buffer[i] == 10)
-        i++;
     return buffer + i;
 }
 
