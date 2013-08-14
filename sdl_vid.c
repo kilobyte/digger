@@ -334,7 +334,7 @@ void vgaputim(int16_t x, int16_t y, int16_t ch, int16_t w, int16_t h)
                          tmp_pxl[i];
 
     vgaputi(x, y, (uint8_t *)&scr, w, h);
-    tmp->pixels = NULL;   /* We should NULL'ify these ppointers, or the VGLBitmapDestroy */
+    tmp->pixels = NULL;   /* We should NULL'ify these pointers, or the VGLBitmapDestroy */
     mask->pixels = NULL;  /* will shoot itself in the foot by trying to dellocate statically */
     SDL_FreeSurface(tmp);/* allocated arrays */
     SDL_FreeSurface(mask);
