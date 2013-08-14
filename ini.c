@@ -169,8 +169,7 @@ bool GetINIBool(char *section, char *key, bool def, char *filename)
     char buf[80];
     sprintf(buf, "%i", def);
     GetINIString(section, key, buf, buf, 80, filename);
-    strupr(buf);
-    if (buf[0] == 'T')
+    if (buf[0] == 'T' || buf[0] == 't' || buf[0] == 'Y' || buf[0] == 'y')
         return true;
     else
         return atoi(buf);
