@@ -320,11 +320,12 @@ A: I don't know. It is impossible to download it from the internet because it
    emulators such as MESS (http://mess.emuverse.com).
 
    If you actually want to play Digger, I suggest you download Digger
-   Remastered. It plays and sounds exactly the same as the original did, looks
-   the same if you use the /C option, and works on all the same computers as
-   well as more modern ones. In fact, if you play them both on a computer or
-   emulator on which the original Digger works properly, you would be hard
-   pushed to tell them apart (except for slight timing differences).
+   Remastered. It plays and sounds exactly the same as the original did,
+   would looks the same if the /C option wasn't mysteriously lost, and works
+   on all the same computers as well as more modern ones. In fact, if you
+   play them both on a computer or emulator on which the original Digger
+   works properly, you would be hard pushed to tell them apart (except for
+   slight timing differences).
 
 
 Q: Why doesn't the unlimited lives option work?

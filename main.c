@@ -35,7 +35,6 @@ static int32_t randv;
 
 char levfname[132];
 bool levfflag = false;
-static bool biosflag = false;
 
 static int mainprog(void);
 static void shownplayers(void);
@@ -47,7 +46,6 @@ static int16_t levno(void);
 static void testpause(void);
 static void calibrate(void);
 static void parsecmd(int argc, char *argv[]);
-void patchcga(void);
 static void initlevel(void);
 void finish(void);
 static void inir(void);
@@ -691,10 +689,6 @@ static void parsecmd(int argc, char *argv[])
                        "         [/E:playback file] [/R:record file] [/O] [/K[A]] "
                        "[/G[:time]] [/2]\n"
                        "         [/U] [/I:level]\n\n"
-#ifndef UNIX
-                       "/C = Use CGA graphics\n"
-                       "/B = Use BIOS palette functions for CGA (slow!)\n"
-#endif
                        "/Q = Quiet mode (no sound at all)       "
                        "/M = No music\n"
                        "/R = Record graphics to file\n"
@@ -715,23 +709,6 @@ static void parsecmd(int argc, char *argv[])
                 musicflag = false;
             if (word[1] == '2')
                 diggers = 2;
-            if (word[1] == 'B' || word[1] == 'b' || word[1] == 'C' || word[1] == 'c')
-            {
-                ginit = cgainit;
-                gpal = cgapal;
-                ginten = cgainten;
-                gclear = cgaclear;
-                ggetpix = cgagetpix;
-                gputi = cgaputi;
-                ggeti = cgageti;
-                gputim = cgaputim;
-                gwrite = cgawrite;
-                gtitle = cgatitle;
-                if (word[1] == 'B' || word[1] == 'b')
-                    biosflag = true;
-                ginit();
-                gpal(0);
-            }
             if (word[1] == 'K' || word[1] == 'k')
             {
                 if (word[2] == 'A' || word[2] == 'a')
@@ -847,7 +824,6 @@ static void inir(void)
 {
     char kbuf[80], vbuf[80];
     int i, j, p;
-    bool cgaflag;
 
     for (i = 0; i < 17; i++)
     {
@@ -894,23 +870,6 @@ static void inir(void)
                                         ININAME);
     use_async_screen_updates = GetINIBool(INI_GRAPHICS_SETTINGS, "Async", true,
                                           ININAME);
-    cgaflag = GetINIBool(INI_GRAPHICS_SETTINGS, "CGA", false, ININAME);
-    biosflag = GetINIBool(INI_GRAPHICS_SETTINGS, "BIOSPalette", false, ININAME);
-    if (cgaflag || biosflag)
-    {
-        ginit = cgainit;
-        gpal = cgapal;
-        ginten = cgainten;
-        gclear = cgaclear;
-        ggetpix = cgagetpix;
-        gputi = cgaputi;
-        ggeti = cgageti;
-        gputim = cgaputim;
-        gwrite = cgawrite;
-        gtitle = cgatitle;
-        ginit();
-        gpal(0);
-    }
     unlimlives = GetINIBool(INI_GAME_SETTINGS, "UnlimitedLives", false, ININAME);
     startlev = (int)GetINIInt(INI_GAME_SETTINGS, "StartLevel", 1, ININAME);
 }

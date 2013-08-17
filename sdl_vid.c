@@ -395,22 +395,3 @@ void vgatitle(void)
     vgaputi(0, 0, (uint8_t *)&tmp, 80, 200);
     SDL_FreeSurface(tmp);
 }
-
-/*
- * Depreciated functions, necessary only to avoid "Undefined symbol:..." compiler
- * errors.
- */
-
-void cgainit(void) {}
-void cgaclear(void) {}
-void cgatitle(void) {}
-void cgawrite(int16_t x, int16_t y, int16_t ch, int16_t c) {}
-void cgaputim(int16_t x, int16_t y, int16_t ch, int16_t w, int16_t h) {}
-void cgageti(int16_t x, int16_t y, uint8_t *p, int16_t w, int16_t h) {}
-void cgaputi(int16_t x, int16_t y, uint8_t *p, int16_t w, int16_t h) {}
-void cgapal(int16_t pal) {}
-void cgainten(int16_t inten) {}
-int16_t cgagetpix(int16_t x, int16_t y)
-{
-    return(0);
-}
