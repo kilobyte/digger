@@ -64,7 +64,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         " V    B B V    ",
         " HHHH     V    ",
         "C   V     V   C",
-        "CC  HHHHHHH  CC"
+        "CC  HHHHHHH  CC",
     },
     {
         "SHHHHH  B B  HS",
@@ -76,7 +76,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         " CC  V CC V    ",
         " BB  VCCCCV CC ",
         "C    V CC V CC ",
-        "CC   HHHHHH    "
+        "CC   HHHHHH    ",
     },
     {
         "SHHHHB B BHHHHS",
@@ -88,7 +88,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         " CC  C V C  CC ",
         " CC  C V C     ",
         "C    C V C    C",
-        "CC   C H C   CC"
+        "CC   C H C   CC",
     },
     {
         "SHBCCCCBCCCCBHS",
@@ -100,7 +100,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         "  C  VCCCV  C  ",
         " CCC HHHHH CCC ",
         "CCCCC CVC CCCCC",
-        "CCCCC CHC CCCCC"
+        "CCCCC CHC CCCCC",
     },
     {
         "SHHHHHHHHHHHHHS",
@@ -112,7 +112,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         "VCCBCCCV CCCC V",
         "V CCBC VCCCCCCV",
         "VCCCCCCVCCCCCCV",
-        "HHHHHHHHHHHHHHH"
+        "HHHHHHHHHHHHHHH",
     },
     {
         "SHHHHHHHHHHHHHS",
@@ -124,7 +124,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         "VC V CCVCC V CV",
         "VCHHBCCVCCBHHCV",
         "VCVCCCCVCCCCVCV",
-        "HHHHHHHHHHHHHHH"
+        "HHHHHHHHHHHHHHH",
     },
     {
         "SHCCCCCVCCCCCHS",
@@ -136,7 +136,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         "CCCCV CVC VCCCC",
         "CCCCHH V HHCCCC",
         "CCCCCV V VCCCCC",
-        "CCCCCHHHHHCCCCC"
+        "CCCCCHHHHHCCCCC",
     },
     {
         "HHHHHHHHHHHHHHS",
@@ -148,7 +148,7 @@ int8_t leveldat[8][MHEIGHT][MWIDTH] =
         "VCCCHHHCHHHCCCV",
         "VCCCC V V CCCCV",
         "VCCCCCV VCCCCCV",
-        "HHHHHHHHHHHHHHH"
+        "HHHHHHHHHHHHHHH",
     }
 };
 
@@ -814,7 +814,7 @@ static const char *keynames[17] =
 {
     "Right", "Up", "Left", "Down", "Fire",
     "Right", "Up", "Left", "Down", "Fire",
-    "Cheat", "Accel", "Brake", "Music", "Sound", "Exit", "Pause"
+    "Cheat", "Accel", "Brake", "Music", "Sound", "Exit", "Pause",
 };
 
 static int dx_sound_volume;
