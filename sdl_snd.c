@@ -18,7 +18,7 @@ bool initsounddevice(void)
     return(true);
 }
 
-bool setsounddevice(int base, int irq, int dma, uint16_t samprate, uint16_t bufsize)
+bool setsounddevice(uint16_t samprate, uint16_t bufsize)
 {
     SDL_AudioSpec wanted;
     bool result = false;

@@ -613,7 +613,7 @@ static void calibrate(void)
         volume = 1;
 }
 
-static uint16_t sound_device, sound_port, sound_irq, sound_dma, sound_rate, sound_length;
+static uint16_t sound_length;
 
 static void parsecmd(int argc, char *argv[])
 {
@@ -630,7 +630,7 @@ static void parsecmd(int argc, char *argv[])
             if (word[1] == 'L' || word[1] == 'l' || word[1] == 'R' || word[1] == 'r' ||
                     word[1] == 'P' || word[1] == 'p' || word[1] == 'S' || word[1] == 's' ||
                     word[1] == 'E' || word[1] == 'e' || word[1] == 'G' || word[1] == 'g' ||
-                    word[1] == 'A' || word[1] == 'a' || word[1] == 'I' || word[1] == 'i')
+                    word[1] == 'I' || word[1] == 'i')
             {
                 if (word[2] == ':')
                     i = 3;
@@ -690,8 +690,7 @@ static void parsecmd(int argc, char *argv[])
                        "[/P:playback file]\n"
                        "         [/E:playback file] [/R:record file] [/O] [/K[A]] "
                        "[/G[:time]] [/2]\n"
-                       "         [/A:device,port,irq,dma,rate,length] [/U] "
-                       "[/I:level]\n\n"
+                       "         [/U] [/I:level]\n\n"
 #ifndef UNIX
                        "/C = Use CGA graphics\n"
                        "/B = Use BIOS palette functions for CGA (slow!)\n"
@@ -740,9 +739,6 @@ static void parsecmd(int argc, char *argv[])
                 else
                     redefkeyb(false);
             }
-            if (word[1] == 'A' || word[1] == 'a')
-                sscanf(word + i, "%hu,%hx,%hu,%hu,%hu,%hu", &sound_device, &sound_port, &sound_irq,
-                       &sound_dma, &sound_rate, &sound_length);
             if (word[1] == 'Q' || word[1] == 'q')
                 quiet = true;
             if (word[1] == 'G' || word[1] == 'g')
@@ -808,7 +804,7 @@ static void parsecmd(int argc, char *argv[])
         timer0 = s1timer0;
         settimer2 = s1settimer2;
         timer2 = s1timer2;
-        soundinitglob(sound_port, sound_irq, sound_dma, sound_length, sound_rate);
+        soundinitglob(sound_length);
         initsound();
     }
 
@@ -889,29 +885,9 @@ static void inir(void)
     }
     soundflag = GetINIBool(INI_SOUND_SETTINGS, "SoundOn", true, ININAME);
     musicflag = GetINIBool(INI_SOUND_SETTINGS, "MusicOn", true, ININAME);
-    sound_device = (int)GetINIInt(INI_SOUND_SETTINGS, "Device", 0, ININAME);
-    sound_port = (int)GetINIInt(INI_SOUND_SETTINGS, "Port", 544, ININAME);
-    sound_irq = (int)GetINIInt(INI_SOUND_SETTINGS, "Irq", 5, ININAME);
-    sound_dma = (int)GetINIInt(INI_SOUND_SETTINGS, "DMA", 1, ININAME);
-    sound_rate = (int)GetINIInt(INI_SOUND_SETTINGS, "Rate", 22050, ININAME);
     sound_length = (int)GetINIInt(INI_SOUND_SETTINGS, "BufferSize", DEFAULT_BUFFER,
                                   ININAME);
-    if (sound_device == 1)
-    {
-        volume = 1;
-        setupsound = s1setupsound;
-        killsound = s1killsound;
-        fillbuffer = s1fillbuffer;
-        initint8 = s1initint8;
-        restoreint8 = s1restoreint8;
-        soundoff = s1soundoff;
-        setspkrt2 = s1setspkrt2;
-        settimer0 = s1settimer0;
-        timer0 = s1timer0;
-        settimer2 = s1settimer2;
-        timer2 = s1timer2;
-        soundinitglob(sound_port, sound_irq, sound_dma, sound_length, sound_rate);
-    }
+
     dx_sound_volume = (int)GetINIInt(INI_SOUND_SETTINGS, "SoundVolume", 0, ININAME);
     g_bWindowed = true;
     use_640x480_fullscreen = GetINIBool(INI_GRAPHICS_SETTINGS, "640x480", false,
