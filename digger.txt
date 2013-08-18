@@ -222,11 +222,8 @@ A: In my explorations of the code of the game, I have discovered lots of things
    60,000 points without dying, you wouldn't get an extra life at that point.
    Some people thought this was unfair, so in Digger Remastered I added an
    option (/U) to allow you to collect as many lives as you like. However,
-   care should be exercised using this option if you intend to record a game
-   for the hall of fame, since your score will be calculated as if you played
-   by the original rules. So you might not have as many lives as you thought
-   you did, and your game might finish sooner. A few people have been caught
-   out by this.
+   this caused a lot of confusion, wasn't ever supported in recorded games,
+   and had only a very minor effect on the game, thus this option is no more.
 
    There are no more extra lives to be had at or after the 1 million point
    mark. Although this was a bug in the original Digger (a kludge really -
@@ -328,16 +325,9 @@ A: I don't know. It is impossible to download it from the internet because it
    slight timing differences).
 
 
-Q: Why doesn't the unlimited lives option work?
+Q: How may I avoid the limit of lives?
 
-A: It does, it just doesn't do what you think it does. Unlimited lives does not
-   mean infinite lives. Unlimited lives means you can collect as many extra
-   lives (you get one every 20,000 points by default) as you like, not that you
-   can die as much as you like without the game being over. If you don't enable
-   the unlimited lives option, you can only collect 4 "spare" lives, as you
-   could in the original Digger.
-
-   If you want to live forever, try using the option /G:3599, which will give
+A: If you want to live forever, try using the option /G:3599, which will give
    you an hour's play with as many lives as you like, after which time you will
    probably be bored anyway.
 
@@ -408,7 +398,6 @@ The command line options are:
   /G:time = Gauntlet mode.
   /2      = Put two diggers on screen at once.
   /?      = Display this list.
-  /U      = Allow unlimited lives.
   /I:level= Start on the specified level instead of level 1. You can't go on
             the hall of fame if you use this option.
 
@@ -457,9 +446,6 @@ works, but games recorded with this version might not play back with future
 versions. When one digger dies the other can continue, and after a while the
 digger that died will be reincarnated (if he has any lives left). He will flash
 for a short time after being reincarnated. During this time, he is invincible.
-
-/U gives you the ability to save up as many lives as you like. See the FAQ
-section for more information about this.
 
 There are two ways to record your game: either give Digger a filename when you
 load it, or press F8 once your game is over. The filename used if none is

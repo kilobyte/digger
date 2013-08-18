@@ -19,7 +19,7 @@
 /* global variables */
 char pldispbuf[14];
 int16_t curplayer = 0, nplayers = 1, diggers = 1, startlev = 1;
-bool unlimlives = false, gauntlet = false, timeout = false;
+bool gauntlet = false, timeout = false;
 int gtime = 0;
 
 static struct game
@@ -673,8 +673,6 @@ static void parsecmd(int argc, char *argv[])
             }
             if (word[1] == 'I' || word[1] == 'i')
                 sscanf(word + i, "%hi", &startlev);
-            if (word[1] == 'U' || word[1] == 'u')
-                unlimlives = true;
             if (word[1] == '?' || word[1] == 'h' || word[1] == 'H')
             {
                 finish();
@@ -688,7 +686,7 @@ static void parsecmd(int argc, char *argv[])
                        "[/P:playback file]\n"
                        "         [/E:playback file] [/R:record file] [/O] [/K[A]] "
                        "[/G[:time]] [/2]\n"
-                       "         [/U] [/I:level]\n\n"
+                       "         [/I:level]\n\n"
                        "/Q = Quiet mode (no sound at all)       "
                        "/M = No music\n"
                        "/R = Record graphics to file\n"
@@ -699,7 +697,6 @@ static void parsecmd(int argc, char *argv[])
                        "/G = Gauntlet mode\n"
                        "/2 = Two player simultaneous mode\n"
                        "/A = Use alternate sound device\n"
-                       "/U = Allow unlimited lives\n"
                        "/I = Start on a level other than 1\n");
                 exit(1);
             }
@@ -870,7 +867,6 @@ static void inir(void)
                                         ININAME);
     use_async_screen_updates = GetINIBool(INI_GRAPHICS_SETTINGS, "Async", true,
                                           ININAME);
-    unlimlives = GetINIBool(INI_GAME_SETTINGS, "UnlimitedLives", false, ININAME);
     startlev = (int)GetINIInt(INI_GAME_SETTINGS, "StartLevel", 1, ININAME);
 }
 

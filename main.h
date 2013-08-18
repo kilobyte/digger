@@ -14,4 +14,4 @@ extern char levfname[];
 extern char pldispbuf[];
 extern int8_t leveldat[8][10][15];
 extern int gtime;
-extern bool gauntlet, timeout, unlimlives;
+extern bool gauntlet, timeout;

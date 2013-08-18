@@ -305,8 +305,6 @@ void recinit(void)
         mprintf("G%i", gtime);
     else
         mprintf("%i", nplayers);
-    /*  if (unlimlives)
-        mprintf("U"); */
     if (startlev > 1)
         mprintf("I%i", startlev);
     mprintf("\n%i\n", bonusscore);

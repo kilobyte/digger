@@ -173,7 +173,7 @@ void addscore(int n, int16_t score)
         writenum(scdat[n].score, 248, 0, 6, 1);
     if (scdat[n].score >= scdat[n].nextbs + n) /* +n to reproduce original bug */
     {
-        if (getlives(n) < 5 || unlimlives)
+        if (getlives(n) < 5)
         {
             if (gauntlet)
                 cgtime += 17897715l; /* 15 second time bonus instead of the life */
