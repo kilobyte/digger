@@ -355,7 +355,7 @@ A: Yes! Recently the original author of Digger, Rob Sleath, contacted me.
    * To ensure that they make as much money as possible.
 
    I have retained the original copyright messages in the game and I take pains
-   to ensure that Windmill are credited properly whereever possible so the
+   to ensure that Windmill are credited properly wherever possible so the
    first of these concerns is taken care of. As for the second - Windmill
    hasn't made any money from Digger for a long time, and if they insist I will
    relinquish all rights to Digger to them to do with as they wish. Having
@@ -527,7 +527,7 @@ it.
 
 * Try to compile Digger. Do not give up if something will go wrong, try to
   resolve the problems instead - it should not be very difficult to sort out.
-* If you have succeded please report your progress to Maxim Sobolev or Andrew
+* If you have succeeded please report your progress to Maxim Sobolev or Andrew
   Jenner
 
 
@@ -863,7 +863,7 @@ of Windmill Software. Edited highlights follow:
 > I had Digger on my laptop when I was there so I asked her a few
 > questions about it. Apparently she was at a gaming show in the early
 > 80s when she had initially demoed digger to an audience. It was in
-> its early stages with alot of bugs. Apparently the folk who did Dig-
+> its early stages with a lot of bugs. Apparently the folk who did Dig-
 > Dug stole the concept and beat Windmill to the gaming market.
 >
 > She said she hadn't seen the game in years and asked if she could

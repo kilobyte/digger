@@ -38,7 +38,7 @@ uint8_t getsample(void);
    highest value the hardware can support without slowing down the program too
    much. Ensure 0x1234<samprate<=0x1234dd and that samprate is a factor of
    0x1234dd (or you won't get the rate you want). For example, a value of
-   44100 equates to about 44192Hz (a .2% difference - negligable unless you're
+   44100 equates to about 44192Hz (a .2% difference - negligible unless you're
    trying to harmonize with a computer running at a different rate, or another
    musical instrument...)
 
