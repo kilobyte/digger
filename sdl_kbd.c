@@ -36,7 +36,7 @@ static int Handler(const SDL_Event *event)
     if (event->type == SDL_QUIT)
         exit(0);
 
-    return(1);
+    return 1;
 }
 
 bool GetAsyncKeyState(int key)
@@ -46,9 +46,9 @@ bool GetAsyncKeyState(int key)
     SDL_PumpEvents();
     keys = SDL_GetKeyState(NULL);
     if (keys[key] == SDL_PRESSED)
-        return(true);
+        return true;
     else
-        return(false);
+        return false;
 }
 
 void initkeyb(void)
@@ -69,7 +69,7 @@ int16_t getkey(void)
     result = kbuffer[0];
     memcpy(kbuffer, kbuffer + 1, --klen);
 
-    return(result);
+    return result;
 }
 
 bool kbhit(void)
@@ -78,8 +78,7 @@ bool kbhit(void)
     doscreenupdate();
 
     if (klen > 0)
-        return(true);
+        return true;
     else
-        return(false);
-
+        return false;
 }

@@ -12,7 +12,7 @@ void inittimer(void)
 
 int32_t getlrt(void)
 {
-    return(0);
+    return 0;
 }
 
 uint32_t gethrt(void)
@@ -35,12 +35,12 @@ uint32_t gethrt(void)
         }
         prev = SDL_GetTicks();
     }
-    return(0);
+    return 0;
 }
 
 int32_t getkips(void)
 {
-    return(1);
+    return 1;
 }
 
 void s0initint8(void)

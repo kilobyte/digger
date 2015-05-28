@@ -95,7 +95,7 @@ static SDL_Surface *ch2bmap(uint8_t *sprite, int16_t w, int16_t h)
     tmp = SDL_CreateRGBSurfaceFrom(sprite, realw, realh, 8, realw, 0, 0, 0, 0);
     SDL_SetColors(tmp, screen->format->palette->colors, 0, screen->format->palette->ncolors);
 
-    return(tmp);
+    return tmp;
 }
 
 void graphicsoff(void)
@@ -106,9 +106,9 @@ static bool setmode(void)
 {
     if ((screen = SDL_SetVideoMode(640, 400, 8, \
                                    SDL_HWSURFACE | SDL_HWPALETTE | addflag)) == NULL)
-        return(false);
+        return false;
     else
-        return(true);
+        return true;
 }
 
 void switchmode(void)
@@ -298,7 +298,7 @@ int16_t vgagetpix(int16_t x, int16_t y)
     uint8_t *pixels;
 
     if ((x > 319) || (y > 199))
-        return (0xff);
+        return 0xff;
 
     vgageti(x, y, (uint8_t *)&tmp, 1, 1);
     pixels = (uint8_t *)tmp->pixels;
@@ -309,7 +309,7 @@ int16_t vgagetpix(int16_t x, int16_t y)
 
     SDL_FreeSurface(tmp);
 
-    return(rval & 0xee);
+    return (rval & 0xee);
 }
 
 void vgaputim(int16_t x, int16_t y, int16_t ch, int16_t w, int16_t h)

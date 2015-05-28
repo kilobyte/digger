@@ -15,7 +15,7 @@ bool wave_device_available = false;
 
 bool initsounddevice(void)
 {
-    return(true);
+    return true;
 }
 
 bool setsounddevice(uint16_t samprate, uint16_t bufsize)
@@ -42,7 +42,7 @@ bool setsounddevice(uint16_t samprate, uint16_t bufsize)
         wave_device_available = true;
     }
 
-    return(result);
+    return result;
 }
 
 static void fill_audio(void *udata, uint8_t *stream, int len)
