@@ -465,7 +465,6 @@ void finish(void)
     killsound();
     soundoff();
     soundkillglob();
-    graphicsoff();
 }
 
 static void shownplayers(void)

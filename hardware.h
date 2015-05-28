@@ -21,8 +21,6 @@ void initkeyb(void);
 int16_t getkey(void);
 bool kbhit(void);
 
-void graphicsoff(void);
-
 void vgainit(void);
 void vgaclear(void);
 void vgapal(int16_t pal);

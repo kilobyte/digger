@@ -98,10 +98,6 @@ static SDL_Surface *ch2bmap(uint8_t *sprite, int16_t w, int16_t h)
     return tmp;
 }
 
-void graphicsoff(void)
-{
-}
-
 static bool setmode(void)
 {
     if ((screen = SDL_SetVideoMode(640, 400, 8, \
